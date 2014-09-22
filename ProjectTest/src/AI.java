@@ -25,4 +25,11 @@ public class AI {
 	
 	
 	
+	public int returnTotal(){
+		return this.total;
+	}
+	
+	public int returnNum(){
+		return this.num;
+	}
 }
