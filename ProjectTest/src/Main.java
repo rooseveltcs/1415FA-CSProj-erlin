@@ -18,7 +18,7 @@ public class Main {
 	
 	public static void startGame(){
 		System.out.println("game1 = Player vs Player");
-		System.out.println("game2 = Player vs Lame AI");
+		System.out.println("game2 = Player vs New AI");
 		System.out.println("game3 = Player vs Normal AI that, from time to time, act retarded");
 		System.out.println("game4 = Player vs Somewhat unbeatable AI");
 		System.out.println("Select game:(1-4)");
@@ -47,6 +47,7 @@ public class Main {
 	public static void game1(){
 		//to be implemented
 		System.out.println("game1 chosen");
+		Game1 game = new Game1();
 	}
 	
 	public static void game2(){
@@ -79,7 +80,7 @@ public class Main {
 				game(num);
 			}
 			else{
-				System.out.println("error: input int not within range of"+ min + "and" + max);
+				System.out.println("error: input int not within range of "+ min + " and " + max);
 				gameNumError(console.next(),min,max);
 			}
 		}
@@ -102,7 +103,7 @@ public class Main {
 				}
 			}
 			else{
-				System.out.println("error: input int not within range of"+ min + "and" + max);
+				System.out.println("error: input int not within range of "+ min + " and " + max);
 				restartError(console.next(),min,max);
 			}
 		}

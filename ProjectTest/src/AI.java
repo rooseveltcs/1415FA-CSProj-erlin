@@ -22,14 +22,4 @@ public class AI {
 		int chosen = list.get(remain).get((int)(Math.random()*num));
 		return chosen;
 	}
-	
-	
-	
-	public int returnTotal(){
-		return this.total;
-	}
-	
-	public int returnNum(){
-		return this.num;
-	}
 }
