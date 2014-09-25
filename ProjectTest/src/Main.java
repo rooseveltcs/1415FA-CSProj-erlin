@@ -7,6 +7,7 @@ public class Main {
 	static int total;
 	static int num = 5;
 	static final int MIN = 0;
+	AI bot1;
 	
 	public static void main(String[] args){
 		do{
@@ -46,31 +47,29 @@ public class Main {
 	
 	public static void game1(){
 		//to be implemented
-		System.out.println("game1 chosen");
+		System.out.println("Game1 chosen");
 		Game1 game = new Game1();
+		while(game.getRepeat()){
+		game.gameStart();
+		}
 	}
 	
 	public static void game2(){
 		//to be implemented
-		System.out.println("game2 chosen");
+		System.out.println("Game2 chosen");
 
 	}
 	
 	public static void game3(){
 		//to be implemented
-		System.out.println("game3 chosen");
+		System.out.println("Game3 chosen");
 
 	}
 	
 	public static void game4(){
 		//to be implemented
-		System.out.println("game4 chosen");
+		System.out.println("Game4 chosen");
 
-	}
-	
-	public static AI getAI(int total, int num){
-		AI AI = new AI(total, num);
-		return AI;
 	}
 
 	public static void gameNumError(String gameNum, int min, int max){
