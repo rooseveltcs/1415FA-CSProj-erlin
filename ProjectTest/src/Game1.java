@@ -76,7 +76,7 @@ public class Game1 {
 				inputError(Main.console.next(),min,max);
 			}
 		}
-		else if(Main.checkInput(temp)){
+		else if(checkInput(temp)){
 			System.out.println("error: input not an int");
 			inputError(Main.console.next(),min,max);
 			
@@ -118,6 +118,16 @@ public class Game1 {
 		}
 		else{
 			repeat = false;
+		}
+	}
+	
+	public static boolean checkInput(String str){
+		if(str.toUpperCase().equals("ENDGAME")){
+			System.out.println("Game1 ended");
+			return false;
+		}
+		else{
+			return true;
 		}
 	}
 }

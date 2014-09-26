@@ -97,7 +97,7 @@ public class Main {
 			int num2 = Integer.parseInt(num);
 			if(num2>=min && num2<=max){
 				if(num2==0){
-					System.out.println("GAME OVER");
+					System.out.println("GAME ENDED");
 					repeat = false;
 				}
 			}
@@ -127,7 +127,7 @@ public class Main {
 	
 	public static boolean checkInput(String str){
 		if(str.toUpperCase().equals("ENDGAME")){
-			System.out.println("GAME OVER");
+			System.out.println("GAME ENDED");
 			return false;
 		}
 		else{
