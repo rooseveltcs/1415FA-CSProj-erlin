@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 public class AI {
 	private ArrayList<ArrayList<Integer>> list = new ArrayList<ArrayList<Integer>>(0);
+	private ArrayList<ArrayList<Integer>> tempList = new ArrayList<ArrayList<Integer>>(0);
 	private int total;
 	private int num;
 	
@@ -19,7 +20,19 @@ public class AI {
 	}
 	
 	public int chooseNum(int remain){
-		int chosen = list.get(remain).get((int)(Math.random()*num));
+		int chosen = list.get(remain-1).get((int)(Math.random()*list.get(remain-1).size()));
 		return chosen;
+	}
+	
+	public void printArray(){
+		System.out.println(list);
+	}
+	
+	public void updateTemp(int remain, int tempNum){
+		
+	}
+	
+	public void improve(){
+		
 	}
 }

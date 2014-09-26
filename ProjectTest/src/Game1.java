@@ -25,20 +25,21 @@ public class Game1 {
 				System.out.println("Remaining:" + total);
 				String str1 = Main.console.next();
 				inputError(str1,1,5);
-				player--;
+				player = 1;
 			}
 			else{
 				System.out.println("Player2: How many do you choose?(1-5)");
 				System.out.println("Remaining:" + total);
 				String str1 = Main.console.next();
 				inputError(str1,1,5);
-				player++;
+				player = 2;
 			}
 		}
 		if(repeat==true){
 		System.out.println("Player" + player + " loses");
 		games++;
 		System.out.println("games: " + games);
+		player = 2;
 		restart();
 		}
 	}

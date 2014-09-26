@@ -7,7 +7,6 @@ public class Main {
 	static int total;
 	static int num = 5;
 	static final int MIN = 0;
-	AI bot1;
 	
 	public static void main(String[] args){
 		do{
@@ -50,13 +49,17 @@ public class Main {
 		System.out.println("Game1 chosen");
 		Game1 game = new Game1();
 		while(game.getRepeat()){
-		game.gameStart();
+			game.gameStart();
 		}
 	}
 	
 	public static void game2(){
 		//to be implemented
 		System.out.println("Game2 chosen");
+		Game2 game = new Game2();
+		while(game.getRepeat()){
+			game.gameStart();
+		}
 
 	}
 	
