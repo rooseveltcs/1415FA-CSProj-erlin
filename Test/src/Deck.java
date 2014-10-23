@@ -13,11 +13,14 @@ public class Deck {
 		randomize(deck);
 	}
 	
-	//needs to be fixed
+	//need to make a test to check if has all cards
 	public void randomize(ArrayList<Card> deck){
 		randomizedDeck = new ArrayList<Card>(deck.size());
-		for(int x=0; x<deck.size(); x++){
-			randomizedDeck.add(deck.get((int)(Math.random()*deck.size())));
+		int size = deck.size();
+		for(int x=0; x<size; x++){
+			int temp = (int)(Math.random()*deck.size());
+			randomizedDeck.add(deck.get(temp));
+			deck.remove(temp);
 		}
 	}
 	
