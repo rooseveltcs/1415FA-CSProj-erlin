@@ -13,7 +13,6 @@ public class Deck {
 		randomize(deck);
 	}
 	
-	//need to make a test to check if has all cards
 	public void randomize(ArrayList<Card> deck){
 		randomizedDeck = new ArrayList<Card>(deck.size());
 		int size = deck.size();
@@ -53,4 +52,14 @@ public class Deck {
 		System.out.println(randomizedDeck.toString());
 		System.out.println(randomizedDeck.size());
 	}
+	
+	public ArrayList<Card> returnRandomized(){
+		return randomizedDeck;
+	}
+	
+	public ArrayList<Card> returndeck(){
+		return deck;
+	}
+	
+	//public ArrayList<>
 }
