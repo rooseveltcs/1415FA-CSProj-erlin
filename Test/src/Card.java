@@ -6,6 +6,8 @@ public class Card {
 	private String cardRep;
 	private Color cardColor;
 	private String colorRep;
+	
+	//sets a cards properties
 	public Card(int num, Color color){
 		cardNum = num;
 		cardColor = color;
@@ -46,6 +48,7 @@ public class Card {
 		}
 	}
 	
+	//for testing card properties
 	public String toString(){
 		return cardRep + "-" + colorRep;
 	}

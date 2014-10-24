@@ -12,6 +12,7 @@ public class DeckCheck {
 		compare(randomizedDeck);
 	}
 	
+	//checks if cards are in a randomizedDeck
 	public static void compare(ArrayList<Card> randomizedDeck){
 		initializeCards();
 		for(int x=0; x<cards.size(); x++){
@@ -20,6 +21,7 @@ public class DeckCheck {
 		System.out.println(randomizedDeck.size());
 	}
 	
+	//checks inidivdual card present in randomizedDeck
 	public static void checkCard(Card card){
 		int temp = 0;
 		for(int x=0; x<randomizedDeck.size(); x++){

@@ -61,5 +61,21 @@ public class Deck {
 		return deck;
 	}
 	
-	//public ArrayList<>
+	//returns a card and deletes it from randomizedDeck
+	public Card giveCard(){
+		int temp = (int)(Math.random()*randomizedDeck.size());
+		Card card = randomizedDeck.get(temp);
+		randomizedDeck.remove(temp);
+		return card;
+	}
+	
+	//randomizes deck(played cards) into randomizedDeck(if size() == 0)
+	public void shuffle(){
+		randomize(deck);
+	}
+	
+	//receives played card from player
+	public void receiveCard(Card card){
+		deck.add(card);
+	}
 }
