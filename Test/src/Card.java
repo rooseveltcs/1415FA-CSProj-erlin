@@ -48,6 +48,42 @@ public class Card {
 		}
 	}
 	
+	public int returnCardNum() {
+		return cardNum;
+	}
+
+	//should not be used
+	public void setCardNum(int cardNum) {
+		this.cardNum = cardNum;
+	}
+
+	public String returnCardRep() {
+		return cardRep;
+	}
+
+	//should not be used
+	public void setCardRep(String cardRep) {
+		this.cardRep = cardRep;
+	}
+
+	public Color returnCardColor() {
+		return cardColor;
+	}
+
+	//should not be used
+	public void setCardColor(Color cardColor) {
+		this.cardColor = cardColor;
+	}
+
+	public String returnColorRep() {
+		return colorRep;
+	}
+
+	//should not be used
+	public void setColorRep(String colorRep) {
+		this.colorRep = colorRep;
+	}
+
 	//for testing card properties
 	public String toString(){
 		return cardRep + "-" + colorRep;
