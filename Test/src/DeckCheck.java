@@ -21,7 +21,7 @@ public class DeckCheck {
 		System.out.println(randomizedDeck.size());
 	}
 	
-	//checks inidivdual card present in randomizedDeck
+	//checks individual card present in randomizedDeck
 	public static void checkCard(Card card){
 		int temp = 0;
 		for(int x=0; x<randomizedDeck.size(); x++){

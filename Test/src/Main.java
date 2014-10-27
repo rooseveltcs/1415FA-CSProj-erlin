@@ -1,7 +1,15 @@
 
 public class Main {
 	public static void main(String[] args){
+		startGame();
+	}
+	
+	public static void startGame(){
 		Deck deck = new Deck(1);
+		//for(int x=0; x<107; x++){
+		//	deck.giveCard();
+		//}
+		System.out.println(deck.returnRandomized().isEmpty());
 		deck.displayCards();
 		deck.displayRandomized();
 	}
