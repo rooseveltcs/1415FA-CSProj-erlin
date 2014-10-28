@@ -12,11 +12,15 @@ public class CardButton extends JButton{
 		super(card.returnCardRep());
 		//super.setBackground(card.returnCardColor());
 		super.setBorder(new LineBorder(card.returnCardColor()));
-		super.setPreferredSize(new Dimension(100, 30));
+		super.setPreferredSize(new Dimension(30, 40));
 		this.card = card;
 	}
 	
-    public void actionPerformed(ActionEvent e){
-    	
-    }
+	public Card returnCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
 }
