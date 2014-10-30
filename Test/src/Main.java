@@ -6,6 +6,8 @@ public class Main {
 	
 	public static void startGame(){
 		Deck deck = new Deck(1);
+		Player player1 = new Player(1);
+		player1.init();
 		//for(int x=0; x<107; x++){
 		//	deck.giveCard();
 		//}

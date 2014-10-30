@@ -20,6 +20,7 @@ public class CardButton extends JButton{
 		return card;
 	}
 
+	//Should not be used
 	public void setCard(Card card) {
 		this.card = card;
 	}

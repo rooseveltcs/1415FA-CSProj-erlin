@@ -147,4 +147,15 @@ public class Player extends JFrame{
 		});
 		frame.setVisible(true);
 	}
+	
+	public void init(){
+		pack();
+		addWindowListener(new WindowAdapter() {
+
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		setVisible(true);
+	}
 }
