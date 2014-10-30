@@ -1,5 +1,5 @@
-import java.awt.Color;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -34,44 +34,95 @@ public class Player extends JFrame{
 		contentPane = getContentPane();
 		contentPane.setLayout(gridBag);
 		
-		/*
-		CardButton button1 = new CardButton(new Card(1, Color.GREEN));
-		JButton button2 = new JButton(new Card(1, Color.BLUE).returnCardRep());
-		button2.setBackground(new Card(1, Color.BLUE).returnCardColor());
+		draw(7);
+		update();
 		
-		GridBagConstraints b1 = new GridBagConstraints();
-		b1.gridx = 0;
-		b1.gridy = 0;
-		GridBagConstraints b2 = new GridBagConstraints();
-		b2.gridx = 1;
-		b2.gridy = 0;
 		
-		contentPane.add(button1, b1);
-		contentPane.add(button2, b2);
-		*/
 		
+		//JButton button
 	}
 
 	public void update(){
+		int gridHeight = 0;
+		int remain = hand.size();
 		contentPane.removeAll();
-		for(int x=0; x<hand.size(); x++){
-			final CardButton button = new CardButton(hand.get(x));
-			final Card temp = button.returnCard();
-			final int tempNum = x;
-			button.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e){
-	            	Deck.receiveCard(temp);
-	            	hand.remove(tempNum);
-	            	System.out.println(hand.size());
-	            	System.out.println(temp.returnCardNum());
-	            	contentPane.repaint();
-	            	update();
-	            }});
-			GridBagConstraints b = new GridBagConstraints();
-			b.gridx = x;
-			b.gridy = 0;
-			contentPane.add(button, b);
+		for(int y=0; y<hand.size()/15 + 1; y++){
+			if(remain<15){
+				for(int x=0; x<remain; x++){
+					final CardButton button = new CardButton(hand.get(15*y+x));
+					final Card temp = button.returnCard();
+					final int tempNum = x;
+					button.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e){
+							Deck.receiveCard(temp);
+							hand.remove(tempNum);
+							System.out.println(hand.size());
+							System.out.println(temp.returnCardNum());
+							pack();
+							contentPane.repaint();
+		            		update();
+						}});
+					GridBagConstraints b = new GridBagConstraints();
+					b.gridx = x;
+					b.gridy = y;
+					contentPane.add(button, b);
+				}
+			}
+			else{
+				for(int x=0; x<15; x++){
+					final CardButton button = new CardButton(hand.get(15*y+x));
+					final Card temp = button.returnCard();
+					final int tempNum = x;
+					button.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e){
+							Deck.receiveCard(temp);
+							hand.remove(tempNum);
+							System.out.println(hand.size());
+							System.out.println(temp.returnCardNum());
+							pack();
+							contentPane.repaint();
+								update();
+						}});
+					GridBagConstraints b = new GridBagConstraints();
+					b.gridx = x;
+					b.gridy = y;
+					contentPane.add(button, b);
+			}
+			remain -= 15;
+			gridHeight++;
+			}
 		}
+		//sets Draw Button
+		JButton buttonD = new JButton("Draw");
+		buttonD.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				draw(1);
+				contentPane.repaint();
+				pack();
+				update();
+            }});
+		GridBagConstraints bD = new GridBagConstraints();
+		bD.gridy = gridHeight + 1;
+		bD.gridwidth = 3;
+		contentPane.add(buttonD, bD);
+		//sets Undo Button
+		JButton buttonU = new JButton("Undo");
+		buttonU.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				if(Deck.returndeck().size() != 0){
+					hand.add(Deck.returndeck().get(Deck.returndeck().size()-1));
+					Deck.returndeck().remove(Deck.returndeck().size()-1);
+					contentPane.repaint();
+					pack();
+					update();
+				}
+            }});
+		GridBagConstraints bU = new GridBagConstraints();
+		bU.gridy = gridHeight + 1;
+		bU.gridwidth = 3;
+		contentPane.add(buttonU, bU);
+		
+		pack();
 		contentPane.paintAll(getGraphics());
 	}
 	
@@ -85,8 +136,7 @@ public class Player extends JFrame{
 	public static void main(String[] args) {
 		deck = new Deck(1);
 		frame = new Player(1);
-		frame.draw(7);
-		frame.update();
+		
 		
 		frame.pack();
 		frame.addWindowListener(new WindowAdapter() {
