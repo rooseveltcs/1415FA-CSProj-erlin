@@ -1,10 +1,22 @@
 
 public class Main {
+	
 	public static void main(String[] args){
 		startGame();
 	}
 	
 	public static void startGame(){
+		
+		Deck deck = new Deck(1);
+		Player player1 = new Player(1);
+		for(int x=0; x<7; x++){
+			player1.receiveCard(deck.giveCard());
+		}
+		player1.displayHand();
+		player1.sortHand();
+		player1.displayHand();
+		
+		/*
 		Deck deck = new Deck(1);
 		Player player1 = new Player(1);
 		player1.init();
@@ -14,6 +26,7 @@ public class Main {
 		System.out.println(deck.returnRandomized().isEmpty());
 		deck.displayCards();
 		deck.displayRandomized();
+		*/
 	}
 }
 

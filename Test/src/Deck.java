@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 
 public class Deck {
-	private static ArrayList<Card> deck = new ArrayList<Card>(0);
-	private static ArrayList<Card> randomizedDeck;
+	private ArrayList<Card> deck = new ArrayList<Card>(0);
+	private ArrayList<Card> randomizedDeck;
 	
 	public Deck(int numDeck){
 		if(numDeck>0){
@@ -14,7 +14,7 @@ public class Deck {
 	}
 	
 	//shuffles deck into randomizedDeck, removes cards in Deck
-	public static void randomize(ArrayList<Card> deck){
+	public void randomize(ArrayList<Card> deck){
 		randomizedDeck = new ArrayList<Card>(deck.size());
 		int size = deck.size();
 		for(int x=0; x<size; x++){
@@ -25,7 +25,7 @@ public class Deck {
 	}
 	
 	//creates deck(number of pack of cards)
-	public static void initializeDeck(int numDeck){
+	public void initializeDeck(int numDeck){
 		for(int x=0; x<numDeck; x++){
 		initializeColorCards(Color.GREEN);
 		initializeColorCards(Color.YELLOW);
@@ -35,7 +35,7 @@ public class Deck {
 	}
 	
 	//initializes cards of one color + one each: Wild and Wild+4
-	public static void initializeColorCards(Color color){
+	public void initializeColorCards(Color color){
 		deck.add(new Card(0, color));
 		for(int x=1; x<13; x++){
 			for(int y=0; y<2; y++){
@@ -47,27 +47,27 @@ public class Deck {
 	}
 	
 	//prints Deck
-	public static void displayCards(){
+	public void displayCards(){
 		System.out.println(deck.toString());
 		System.out.println(deck.size());
 	}
 	
 	//prints RandomizedDeck
-	public static void displayRandomized(){
+	public void displayRandomized(){
 		System.out.println(randomizedDeck.toString());
 		System.out.println(randomizedDeck.size());
 	}
 	
-	public static ArrayList<Card> returnRandomized(){
+	public ArrayList<Card> returnRandomized(){
 		return randomizedDeck;
 	}
 	
-	public static ArrayList<Card> returndeck(){
+	public ArrayList<Card> returndeck(){
 		return deck;
 	}
 	
 	//returns a card and deletes it from randomizedDeck. If rDeck empty, shuffle.
-	public static Card giveCard(){
+	public Card giveCard(){
 		int temp = (int)(Math.random()*randomizedDeck.size());
 		Card card = randomizedDeck.get(temp);
 		randomizedDeck.remove(temp);
@@ -78,12 +78,18 @@ public class Deck {
 	}
 	
 	//randomizes deck(played cards) into randomizedDeck(if size() == 0).
-	public static void shuffle(){
+	public void shuffle(){
 		randomize(deck);
 	}
 	
 	//receives played card from player. Adds card to deck.
-	public static void receiveCard(Card card){
+	public void receiveCard(Card card){
 		deck.add(card);
+	}
+	
+	public Card returnPlayedCard(){
+		Card card = deck.get(deck.size()-1);
+		deck.remove(card);
+		return card;
 	}
 }

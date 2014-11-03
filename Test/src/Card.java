@@ -1,11 +1,12 @@
 import java.awt.Color;
 
 
-public class Card {
+public class Card implements Comparable<Card>{
 	private int cardNum;
 	private String cardRep;
 	private Color cardColor;
 	private String colorRep;
+	private int colorInt;
 	
 	//sets a cards properties
 	public Card(int num, Color color){
@@ -33,18 +34,32 @@ public class Card {
 		}
 		if(cardColor.equals(Color.GREEN)){
 			colorRep = "GREEN";
+			colorInt= 1;
 		}
 		if(cardColor.equals(Color.YELLOW)){
 			colorRep = "YELLOW";
+			colorInt= 2;
 		}
 		if(cardColor.equals(Color.BLUE)){
 			colorRep = "BLUE";
+			colorInt= 3;
 		}
 		if(cardColor.equals(Color.RED)){
 			colorRep = "RED";
+			colorInt= 4;
 		}
 		if(cardColor.equals(Color.BLACK)){
 			colorRep = "BLACK";
+			colorInt= 5;
+		}
+	}
+	
+	public int compareTo(Card comparedCard){
+		if(this.colorInt - comparedCard.returnColorInt() != 0){
+			return this.colorInt - comparedCard.colorInt;
+		}
+		else{
+			return this.cardNum - comparedCard.cardNum;
 		}
 	}
 	
@@ -84,6 +99,15 @@ public class Card {
 		this.colorRep = colorRep;
 	}
 
+	public int returnColorInt() {
+		return colorInt;
+	}
+	
+	//should not be used
+	public void setColorInt(int colorInt) {
+		this.colorInt = colorInt;
+	}
+	
 	//for testing card properties
 	public String toString(){
 		return cardRep + "-" + colorRep;
