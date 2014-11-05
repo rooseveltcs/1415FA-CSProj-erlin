@@ -6,9 +6,15 @@ public class Deck {
 	private ArrayList<Card> deck = new ArrayList<Card>(0);
 	private ArrayList<Card> randomizedDeck;
 	
+	//initializes a deck(with number of packs of cards)
+	//to be added: infinite cards(every draw is random, MAY have all Wild or all +4)
+	//	when input <=0
 	public Deck(int numDeck){
 		if(numDeck>0){
 			initializeDeck(numDeck);
+		}
+		else{
+			//to be added
 		}
 		randomize(deck);
 	}
@@ -47,7 +53,7 @@ public class Deck {
 	}
 	
 	//prints Deck
-	public void displayCards(){
+	public void displayDeck(){
 		System.out.println(deck.toString());
 		System.out.println(deck.size());
 	}
@@ -62,7 +68,7 @@ public class Deck {
 		return randomizedDeck;
 	}
 	
-	public ArrayList<Card> returndeck(){
+	public ArrayList<Card> returnDeck(){
 		return deck;
 	}
 	

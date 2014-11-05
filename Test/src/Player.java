@@ -6,6 +6,7 @@ public class Player{
 	private ArrayList<Card> hand;
 	private int playerNum;
 	
+	//creates a player with a specific playerNumber
 	public Player(int playerNum){
 		this.playerNum = playerNum;
 		hand = new ArrayList<Card>(0);
@@ -17,6 +18,7 @@ public class Player{
 		return card;
 	}
 	
+	//sorts hand of cards by color, then number
 	public void sortHand(){
 		Collections.sort(hand);
 	}

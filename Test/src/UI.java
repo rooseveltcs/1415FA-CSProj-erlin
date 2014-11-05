@@ -18,13 +18,18 @@ public class UI extends JFrame{
 	private Deck deck;
 	//private boolean endTurnButton;
 	
+	//creates UI of a player, with # of decks
 	public UI(Player player, Deck deck){
 		this.player = player;
 		this.deck = deck;
+		for(int x=0; x<7; x++){
+			this.player.receiveCard(deck.giveCard());
+		}
 		//this.endTurnButton = endTurnButton;
 		createGui();
 	}
 	
+	//sets frame's info
 	public void createGui() throws HeadlessException{
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setTitle("Player" + player.returnPlayerNum());
@@ -36,7 +41,8 @@ public class UI extends JFrame{
 		update();
 	}
 	
-	
+	//updates frame
+	//adds buttons...etc
 	public void update(){
 		player.sortHand();
 		int gridHeight = 0;
@@ -45,6 +51,8 @@ public class UI extends JFrame{
 		for(int y=0; y<player.returnHand().size()/15 + 1; y++){
 			if(remain<15){
 				for(int x=0; x<remain; x++){
+					//could probably be shortened and be more easier to read, but might take too much time
+					//below code also the same
 					final CardButton button = new CardButton(player.returnHand().get(15*y+x));
 					final Card temp = button.returnCard();
 					final int tempNum = x;
@@ -56,7 +64,7 @@ public class UI extends JFrame{
 							System.out.println("hand: " + player.returnHand().size());
 							System.out.println("played: " + temp.returnCardNum());
 							System.out.println("remaining: " + deck.returnRandomized().size());
-							System.out.println("playedDeck: " + deck.returndeck().size());
+							System.out.println("playedDeck: " + deck.returnDeck().size());
 							pack();
 							contentPane.repaint();
 		            		update();
@@ -79,7 +87,7 @@ public class UI extends JFrame{
 							System.out.println("hand: " + player.returnHand().size());
 							System.out.println("played: " + temp.returnCardNum());
 							System.out.println("remaining: " + deck.returnRandomized().size());
-							System.out.println("playedDeck: " + deck.returndeck().size());
+							System.out.println("playedDeck: " + deck.returnDeck().size());
 							pack();
 							contentPane.repaint();
 								update();
@@ -110,9 +118,8 @@ public class UI extends JFrame{
 		JButton buttonU = new JButton("Undo");
 		buttonU.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				if(deck.returndeck().size() != 0){
-					player.returnHand().add(deck.returndeck().get(deck.returndeck().size()-1));
-					deck.returndeck().remove(deck.returndeck().size()-1);
+				if(deck.returnDeck().size() != 0){
+					player.receiveCard(deck.returnPlayedCard());
 					contentPane.repaint();
 					pack();
 					update();
@@ -150,10 +157,12 @@ public class UI extends JFrame{
 	}
 	*/
 	
+	//pushes deck
 	public Deck push(){
 		return deck;
 	}
 	
+	//pulls deck
 	public void pull(Deck deck){
 		this.deck = deck;
 	}
@@ -172,5 +181,9 @@ public class UI extends JFrame{
 			}
 		});
 		frame.setVisible(true);
+	}
+	
+	public Player returnPlayer(){
+		return player;
 	}
 }

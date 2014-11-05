@@ -6,7 +6,10 @@ public class Main {
 	}
 	
 	public static void startGame(){
+		Game game = new Game(2, 1);
+		game.returnDeck().displayRandomized();
 		
+		/*
 		Deck deck = new Deck(1);
 		Player player1 = new Player(1);
 		for(int x=0; x<7; x++){
@@ -15,6 +18,7 @@ public class Main {
 		player1.displayHand();
 		player1.sortHand();
 		player1.displayHand();
+		*/
 		
 		/*
 		Deck deck = new Deck(1);
