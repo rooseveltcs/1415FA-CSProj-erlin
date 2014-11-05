@@ -33,4 +33,8 @@ public class Player{
 	public void displayHand(){
 			System.out.println(hand);
 	}
+	
+	public ArrayList<Card> returnHand(){
+		return hand;
+	}
 }
