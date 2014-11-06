@@ -5,11 +5,13 @@ import java.util.ArrayList;
 public class Deck {
 	private ArrayList<Card> deck = new ArrayList<Card>(0);
 	private ArrayList<Card> randomizedDeck;
+	private int numDeck;
 	
 	//initializes a deck(with number of packs of cards)
 	//to be added: infinite cards(every draw is random, MAY have all Wild or all +4)
 	//	when input <=0
 	public Deck(int numDeck){
+		this.numDeck = numDeck;
 		if(numDeck>0){
 			initializeDeck(numDeck);
 		}
@@ -97,5 +99,9 @@ public class Deck {
 		Card card = deck.get(deck.size()-1);
 		deck.remove(card);
 		return card;
+	}
+	
+	public int returnNumDeck(){
+		return numDeck;
 	}
 }

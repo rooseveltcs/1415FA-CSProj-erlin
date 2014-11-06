@@ -1,12 +1,13 @@
 
 public class Main {
+	static Game game;
 	
 	public static void main(String[] args){
 		startGame();
 	}
 	
 	public static void startGame(){
-		Game game = new Game(2, 1);
+		game = new Game(2, 1);
 		game.returnDeck().displayRandomized();
 		
 		/*
@@ -31,6 +32,10 @@ public class Main {
 		deck.displayCards();
 		deck.displayRandomized();
 		*/
+	}
+
+	public static Game returnGame(){
+		return game;
 	}
 }
 

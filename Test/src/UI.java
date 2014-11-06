@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,12 +17,14 @@ public class UI extends JFrame{
 	private Container contentPane;
 	private Player player;
 	private Deck deck;
+	private Deck tempDeck;
 	//private boolean endTurnButton;
 	
 	//creates UI of a player, with # of decks
 	public UI(Player player, Deck deck){
 		this.player = player;
 		this.deck = deck;
+		this.tempDeck = new Deck(deck.returnNumDeck());
 		for(int x=0; x<7; x++){
 			this.player.receiveCard(deck.giveCard());
 		}
@@ -60,8 +63,9 @@ public class UI extends JFrame{
 						@Override
 						public void actionPerformed(ActionEvent e){
 							deck.receiveCard(temp);
+							tempDeck.receiveCard(temp);
 							player.returnHand().remove(tempNum);
-							System.out.println("hand: " + player.returnHand().size());
+							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + "\n");							System.out.println("hand: " + player.returnHand().size());
 							System.out.println("played: " + temp.returnCardNum());
 							System.out.println("remaining: " + deck.returnRandomized().size());
 							System.out.println("playedDeck: " + deck.returnDeck().size());
@@ -83,7 +87,9 @@ public class UI extends JFrame{
 					button.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e){
 							deck.receiveCard(temp);
+							tempDeck.receiveCard(temp);
 							player.returnHand().remove(tempNum);
+							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + "\n");
 							System.out.println("hand: " + player.returnHand().size());
 							System.out.println("played: " + temp.returnCardNum());
 							System.out.println("remaining: " + deck.returnRandomized().size());
@@ -118,8 +124,9 @@ public class UI extends JFrame{
 		JButton buttonU = new JButton("Undo");
 		buttonU.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				if(deck.returnDeck().size() != 0){
+				if(tempDeck.returnDeck().size() != 0){
 					player.receiveCard(deck.returnPlayedCard());
+					tempDeck.returnDeck().remove(tempDeck.returnDeck().size()-1);
 					contentPane.repaint();
 					pack();
 					update();
@@ -156,16 +163,6 @@ public class UI extends JFrame{
 		System.exit(0);
 	}
 	*/
-	
-	//pushes deck
-	public Deck push(){
-		return deck;
-	}
-	
-	//pulls deck
-	public void pull(Deck deck){
-		this.deck = deck;
-	}
 	
 	//testing
 	public static void main(String[] args) {
