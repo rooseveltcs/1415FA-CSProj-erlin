@@ -1,3 +1,8 @@
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
+
 
 public class Main {
 	static Game game;
@@ -7,7 +12,14 @@ public class Main {
 	}
 	
 	public static void startGame(){
-		game = new Game(2, 1);
+		game = new Game1(2, 1);
+		game.pack();
+		game.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		game.setVisible(true);
 		game.returnDeck().displayRandomized();
 		
 		/*

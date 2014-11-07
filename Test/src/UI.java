@@ -60,12 +60,11 @@ public class UI extends JFrame{
 					final Card temp = button.returnCard();
 					final int tempNum = x;
 					button.addActionListener(new ActionListener() {
-						@Override
 						public void actionPerformed(ActionEvent e){
 							deck.receiveCard(temp);
 							tempDeck.receiveCard(temp);
 							player.returnHand().remove(tempNum);
-							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + "\n");							System.out.println("hand: " + player.returnHand().size());
+							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");							System.out.println("hand: " + player.returnHand().size());
 							System.out.println("played: " + temp.returnCardNum());
 							System.out.println("remaining: " + deck.returnRandomized().size());
 							System.out.println("playedDeck: " + deck.returnDeck().size());
@@ -89,7 +88,7 @@ public class UI extends JFrame{
 							deck.receiveCard(temp);
 							tempDeck.receiveCard(temp);
 							player.returnHand().remove(tempNum);
-							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + "\n");
+							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
 							System.out.println("hand: " + player.returnHand().size());
 							System.out.println("played: " + temp.returnCardNum());
 							System.out.println("remaining: " + deck.returnRandomized().size());
@@ -112,6 +111,7 @@ public class UI extends JFrame{
 		buttonD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				player.receiveCard(deck.giveCard());
+				Main.returnGame().addText("Player" + player.returnPlayerNum() + " drew a card.\n");
 				contentPane.repaint();
 				pack();
 				update();
@@ -125,8 +125,10 @@ public class UI extends JFrame{
 		buttonU.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(tempDeck.returnDeck().size() != 0){
-					player.receiveCard(deck.returnPlayedCard());
+					Card tempCard = deck.returnPlayedCard();
+					player.receiveCard(tempCard);
 					tempDeck.returnDeck().remove(tempDeck.returnDeck().size()-1);
+					Main.returnGame().addText("Player" + player.returnPlayerNum() + " took back " + tempCard + ".\n");
 					contentPane.repaint();
 					pack();
 					update();
@@ -182,5 +184,13 @@ public class UI extends JFrame{
 	
 	public Player returnPlayer(){
 		return player;
+	}
+	
+	public Deck returnDeck(){
+		return deck;
+	}
+	
+	public Deck returnTempDeck(){
+		return tempDeck;
 	}
 }
