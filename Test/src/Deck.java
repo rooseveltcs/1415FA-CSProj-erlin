@@ -95,6 +95,10 @@ public class Deck {
 		deck.add(card);
 	}
 	
+	public Card returnLastCard(){
+		return deck.get(deck.size()-1);
+	}
+	
 	public Card returnPlayedCard(){
 		Card card = deck.get(deck.size()-1);
 		deck.remove(card);

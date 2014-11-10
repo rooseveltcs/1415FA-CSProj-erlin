@@ -17,7 +17,7 @@ public class Game extends JFrame{
 	private Container contentPane;
 	private int players;
 	private Deck deck;
-	private ArrayList<UI> uiList = new ArrayList<UI>(0);
+	private ArrayList<LimitedUI> uiList = new ArrayList<LimitedUI>(0);
 	
 	private JTextArea jtArea;
 	private JTextField jtField;
@@ -26,9 +26,12 @@ public class Game extends JFrame{
 		this.players = players;
 		this.deck = new Deck(deckNum);
 		for(int x=1; x<=players; x++){
-			uiList.add(new UI(new Player(x), deck));
+			uiList.add(new LimitedUI(new Player(x), deck));
 		}
+		Card firstCard = deck.giveCard();
+		deck.receiveCard(firstCard);
 		createGui();
+		addText("First card: " + firstCard + "\n");
 	}
 	
 	public void createGui(){
@@ -96,7 +99,7 @@ public class Game extends JFrame{
 		return deck;
 	}
 	
-	public ArrayList<UI> returnList(){
+	public ArrayList<LimitedUI> returnList(){
 		return uiList;
 	}
 }

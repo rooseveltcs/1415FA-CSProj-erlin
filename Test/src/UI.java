@@ -193,4 +193,8 @@ public class UI extends JFrame{
 	public Deck returnTempDeck(){
 		return tempDeck;
 	}
+	
+	public Container returnContentPane(){
+		return contentPane;
+	}
 }
