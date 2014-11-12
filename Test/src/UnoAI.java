@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,6 +12,16 @@ public class UnoAI {
 		this.playerNum = playerNum;
 		hand = new ArrayList<Card>(0);
 		this.deck = deck;
+	}
+	
+	public void act(){
+		Card chosen = chooseCard();
+		if(chosen!=null){
+			deck.receiveCard(giveCard(chosen));
+		}
+		else{
+			drawCard();
+		}
 	}
 	
 	//removes card from hand and gives it
@@ -30,7 +41,21 @@ public class UnoAI {
 	}
 	
 	public Card chooseCard(){
-			
+		for(int x=0; x<hand.size(); x++){
+			if(deck.returnLastCard().returnCardColor().equals(hand.get(x).returnCardColor()) || deck.returnLastCard().returnCardNum() == (hand.get(x).returnCardNum()) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
+				return hand.get(x);
+			}
+		}
+		for(int x=0; x<hand.size(); x++){
+			if(hand.get(x).returnCardColor().equals(Color.BLACK)){
+				return hand.get(x);
+			}
+		}
+		return null;
+	}
+	
+	public void drawCard(){
+		receiveCard(deck.giveCard());
 	}
 	
 	public int returnPlayerNum(){

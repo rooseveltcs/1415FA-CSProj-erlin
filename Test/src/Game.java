@@ -14,13 +14,13 @@ import javax.swing.JTextField;
 
 public class Game extends JFrame{
 	static final long serialVersionUID = 0;
-	private Container contentPane;
-	private int players;
-	private Deck deck;
-	private ArrayList<LimitedUI> uiList = new ArrayList<LimitedUI>(0);
+	protected Container contentPane;
+	protected int players;
+	protected Deck deck;
+	protected ArrayList<LimitedUI> uiList = new ArrayList<LimitedUI>(0);
 	
-	private JTextArea jtArea;
-	private JTextField jtField;
+	protected JTextArea jtArea;
+	protected JTextField jtField;
 	
 	public Game(int players, int deckNum){
 		this.players = players;
