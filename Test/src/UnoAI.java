@@ -3,14 +3,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
-public class UnoAI {
+public class UnoAI extends Player{
 	private ArrayList<Card> hand;
 	private int playerNum;
 	private Deck deck;
 	
 	public UnoAI(int playerNum, Deck deck){
-		this.playerNum = playerNum;
-		hand = new ArrayList<Card>(0);
+		super(playerNum);
 		this.deck = deck;
 	}
 	
@@ -18,26 +17,12 @@ public class UnoAI {
 		Card chosen = chooseCard();
 		if(chosen!=null){
 			deck.receiveCard(giveCard(chosen));
+			Main.returnGame().addText("AI" + playerNum +" played " + chosen);
 		}
 		else{
 			drawCard();
+			Main.returnGame().addText("AI" + playerNum +" drew a card");
 		}
-	}
-	
-	//removes card from hand and gives it
-	public Card giveCard(Card card){
-		hand.remove(card);
-		return card;
-	}
-		
-	//sorts hand of cards by color, then number
-	public void sortHand(){
-		Collections.sort(hand);
-	}
-	
-	//receives card and adds it to hand
-	public void receiveCard(Card card){
-		hand.add(card);
 	}
 	
 	public Card chooseCard(){
@@ -58,15 +43,7 @@ public class UnoAI {
 		receiveCard(deck.giveCard());
 	}
 	
-	public int returnPlayerNum(){
-		return playerNum;
-	}	
-	
-	public ArrayList<Card> returnHand(){
-		return hand;
+	public Deck returnDeck(){
+		return deck;
 	}
-
-	public void displayHand(){
-		System.out.println(hand);
-}
 }

@@ -3,8 +3,8 @@ import java.util.Collections;
 
 
 public class Player{
-	private ArrayList<Card> hand;
-	private int playerNum;
+	protected ArrayList<Card> hand;
+	protected int playerNum;
 	
 	//creates a player with a specific playerNumber
 	public Player(int playerNum){
