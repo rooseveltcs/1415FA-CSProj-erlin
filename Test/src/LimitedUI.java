@@ -56,56 +56,12 @@ public class LimitedUI extends JFrame{
 				for(int x=0; x<remain; x++){
 					//could probably be shortened and be more easier to read, but might take too much time
 					//below code also the same
-					final CardButton button = new CardButton(player.returnHand().get(15*y+x));
-					final Card temp = button.returnCard();
-					final int tempNum = x;
-					button.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e){
-							if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
-								deck.receiveCard(temp);
-								tempDeck.receiveCard(temp);
-								player.returnHand().remove(tempNum);
-								Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
-								System.out.println("hand: " + player.returnHand().size());
-								System.out.println("played: " + temp.returnCardNum());
-								System.out.println("remaining: " + deck.returnRandomized().size());
-								System.out.println("playedDeck: " + deck.returnDeck().size());
-								pack();
-								contentPane.repaint();
-		            			update();
-							}
-						}});
-					GridBagConstraints b = new GridBagConstraints();
-					b.gridx = x;
-					b.gridy = y;
-					contentPane.add(button, b);
+					setButton(y, x);
 				}
 			}
 			else{
 				for(int x=0; x<15; x++){
-					final CardButton button = new CardButton(player.returnHand().get(15*y+x));
-					final Card temp = button.returnCard();
-					final int tempNum = x;
-					button.addActionListener(new ActionListener() {
-						public void actionPerformed(ActionEvent e){
-							if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
-								deck.receiveCard(temp);
-								tempDeck.receiveCard(temp);
-								player.returnHand().remove(tempNum);
-								Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
-								System.out.println("hand: " + player.returnHand().size());
-								System.out.println("played: " + temp.returnCardNum());
-								System.out.println("remaining: " + deck.returnRandomized().size());
-								System.out.println("playedDeck: " + deck.returnDeck().size());
-								pack();
-								contentPane.repaint();
-								update();
-							}
-						}});
-					GridBagConstraints b = new GridBagConstraints();
-					b.gridx = x;
-					b.gridy = y;
-					contentPane.add(button, b);
+					setButton(y, x);
 			}
 			remain -= 15;
 			gridHeight++;
@@ -162,6 +118,32 @@ public class LimitedUI extends JFrame{
 		
 		pack();
 		contentPane.paintAll(getGraphics());
+	}
+
+	public void setButton(int y, int x) {
+		final CardButton button = new CardButton(player.returnHand().get(15*y+x));
+		final Card temp = button.returnCard();
+		final int tempNum = x;
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
+					deck.receiveCard(temp);
+					tempDeck.receiveCard(temp);
+					player.returnHand().remove(tempNum);
+					Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
+					System.out.println("hand: " + player.returnHand().size());
+					System.out.println("played: " + temp.returnCardNum());
+					System.out.println("remaining: " + deck.returnRandomized().size());
+					System.out.println("playedDeck: " + deck.returnDeck().size());
+					pack();
+					contentPane.repaint();
+					update();
+				}
+			}});
+		GridBagConstraints b = new GridBagConstraints();
+		b.gridx = x;
+		b.gridy = y;
+		contentPane.add(button, b);
 	}
 	
 	/*

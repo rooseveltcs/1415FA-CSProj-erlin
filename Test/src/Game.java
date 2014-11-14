@@ -17,7 +17,7 @@ public class Game extends JFrame{
 	protected Container contentPane;
 	protected int players;
 	protected Deck deck;
-	protected ArrayList<LimitedUI> uiList = new ArrayList<LimitedUI>(0);
+	protected ArrayList<JFrame> uiList = new ArrayList<JFrame>(0);
 	
 	protected JTextArea jtArea;
 	protected JTextField jtField;
@@ -60,7 +60,13 @@ public class Game extends JFrame{
 		
 		for(int x=0; x<players; x++){
 			final int temp = x;
-			JButton button = new JButton("Player" + (x+1));
+			JButton button;
+			if(uiList.get(x).getClass().equals(UnoUI.class)){
+				button = new JButton("AI" + (x+1));
+			}
+			else{
+				button = new JButton("Player" + (x+1));
+			}
 			button.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e){
 	            	if(uiList.get(temp).isVisible()){
@@ -96,7 +102,7 @@ public class Game extends JFrame{
 		return deck;
 	}
 	
-	public ArrayList<LimitedUI> returnList(){
+	public ArrayList<JFrame> returnList(){
 		return uiList;
 	}
 }
