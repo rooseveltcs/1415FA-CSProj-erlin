@@ -22,6 +22,7 @@ public class Main {
 		game.setVisible(true);
 		game.returnDeck().displayRandomized();
 		
+		
 		/*
 		Deck deck = new Deck(1);
 		Player player1 = new Player(1);

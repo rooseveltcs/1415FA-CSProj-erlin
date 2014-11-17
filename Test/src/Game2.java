@@ -1,4 +1,5 @@
 
+
 public class Game2 extends Game{
 	protected int humans;
 
@@ -18,7 +19,18 @@ public class Game2 extends Game{
 		deck.receiveCard(firstCard);
 		createGui();
 		addText("First card: " + firstCard + "\n");
+		gameStart();
 	}
 	
-	
+	public void gameStart(){
+		//for(int x=0; x<1; x++){
+		//	if(uiList.get(x).returnType() == 1){
+				
+		//	}
+		//	else{
+					//work on this
+				uiList.get(0).returnAI().act();
+		//	}
+		//}
+	}
 }

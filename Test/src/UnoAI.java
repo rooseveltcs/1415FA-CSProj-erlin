@@ -4,9 +4,9 @@ import java.util.Collections;
 
 
 public class UnoAI extends Player{
-	private ArrayList<Card> hand;
-	private int playerNum;
-	private Deck deck;
+	protected ArrayList<Card> hand;
+	protected int playerNum;
+	protected Deck deck;
 	
 	public UnoAI(int playerNum, Deck deck){
 		super(playerNum);

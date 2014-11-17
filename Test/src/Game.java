@@ -17,7 +17,7 @@ public class Game extends JFrame{
 	protected Container contentPane;
 	protected int players;
 	protected Deck deck;
-	protected ArrayList<JFrame> uiList = new ArrayList<JFrame>(0);
+	protected ArrayList<UI> uiList = new ArrayList<UI>(0);
 	
 	protected JTextArea jtArea;
 	protected JTextField jtField;
@@ -70,6 +70,7 @@ public class Game extends JFrame{
 			button.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e){
 	            	if(uiList.get(temp).isVisible()){
+	            		uiList.get(temp).endTurn();
 	            		uiList.get(temp).setVisible(false);
 	            	}
 	            	else{
@@ -102,7 +103,7 @@ public class Game extends JFrame{
 		return deck;
 	}
 	
-	public ArrayList<JFrame> returnList(){
+	public ArrayList<UI> returnList(){
 		return uiList;
 	}
 }

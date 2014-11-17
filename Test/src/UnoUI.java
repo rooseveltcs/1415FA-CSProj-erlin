@@ -10,13 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 
-public class UnoUI extends JFrame{
+public class UnoUI extends UI{
 	static final long serialVersionUID = 0;
-	private Container contentPane;
-	private UnoAI AI;
-	private Deck deck;
+	protected Container contentPane;
+	protected UnoAI AI;
+	protected Deck deck;
 	
 	public UnoUI(UnoAI AI){
+		type = 2;
 		this.AI = AI;
 		this.deck = AI.returnDeck();
 		for(int x=0; x<7; x++){
@@ -88,5 +89,13 @@ public class UnoUI extends JFrame{
 		b.gridx = x;
 		b.gridy = y;
 		contentPane.add(button, b);
+	}
+	
+	public void act(){
+		AI.act();
+	}
+	
+	public UnoAI returnAI(){
+		return AI;
 	}
 }

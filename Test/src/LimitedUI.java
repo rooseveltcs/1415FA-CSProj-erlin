@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 
 //can be shortened/condensed by extend, maybe execute later
-public class LimitedUI extends JFrame{
+public class LimitedUI extends UI{
 	static final long serialVersionUID = 0;
 	private Container contentPane;
 	private Player player;
@@ -22,6 +22,7 @@ public class LimitedUI extends JFrame{
 	
 	//creates UI of a player, with # of decks
 	public LimitedUI(Player player, Deck deck){
+		type = 1;
 		this.player = player;
 		this.deck = deck;
 		this.tempDeck = new Deck(deck.returnNumDeck());
@@ -153,11 +154,16 @@ public class LimitedUI extends JFrame{
 	}
 	*/
 	
+	public void endTurn(){
+		tempDeck.returnDeck().clear();
+	}
+	
+	
 	//testing
 	public static void main(String[] args) {
 		Player player = new Player(1);
 		Deck deck = new Deck(1);
-		UI frame = new UI(player, deck);
+		UI frame = new LimitedUI(player, deck);
 		
 		frame.pack();
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
