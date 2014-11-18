@@ -94,6 +94,10 @@ public class Game extends JFrame{
 		jtArea.setCaretPosition(jtArea.getDocument().getLength());
 	}
 	
+	public void gameStart(){
+		
+	}
+	
 	//Not really needed, but can be added
 	//public void deleteLastLine(){
 	//	jtArea

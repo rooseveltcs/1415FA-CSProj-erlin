@@ -14,9 +14,6 @@ import javax.swing.JFrame;
 //can be shortened/condensed by extend, maybe execute later
 public class LimitedUI extends UI{
 	static final long serialVersionUID = 0;
-	private Container contentPane;
-	private Player player;
-	private Deck deck;
 	private Deck tempDeck;
 	//private boolean endTurnButton;
 	
@@ -156,6 +153,7 @@ public class LimitedUI extends UI{
 	
 	public void endTurn(){
 		tempDeck.returnDeck().clear();
+		setTurn(false);
 	}
 	
 	
@@ -175,19 +173,7 @@ public class LimitedUI extends UI{
 		frame.setVisible(true);
 	}
 	
-	public Player returnPlayer(){
-		return player;
-	}
-	
-	public Deck returnDeck(){
-		return deck;
-	}
-	
 	public Deck returnTempDeck(){
 		return tempDeck;
-	}
-	
-	public Container returnContentPane(){
-		return contentPane;
 	}
 }

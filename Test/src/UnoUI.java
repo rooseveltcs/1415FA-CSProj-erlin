@@ -13,15 +13,13 @@ import javax.swing.JFrame;
 public class UnoUI extends UI{
 	static final long serialVersionUID = 0;
 	protected Container contentPane;
-	protected UnoAI AI;
-	protected Deck deck;
 	
-	public UnoUI(UnoAI AI){
+	public UnoUI(Player player, Deck deck){
 		type = 2;
-		this.AI = AI;
-		this.deck = AI.returnDeck();
+		this.player = player;
+		this.deck = deck;
 		for(int x=0; x<7; x++){
-			this.AI.receiveCard(deck.giveCard());
+			this.player.receiveCard(deck.giveCard());
 		
 		}
 		createGui();
@@ -29,7 +27,7 @@ public class UnoUI extends UI{
 	
 	public void createGui() throws HeadlessException{
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		this.setTitle("AI" + AI.returnPlayerNum());
+		this.setTitle("AI" + player.returnPlayerNum());
 		this.setResizable(true);
 		GridBagLayout gridBag = new GridBagLayout();
 		contentPane = getContentPane();
@@ -51,11 +49,11 @@ public class UnoUI extends UI{
 	}
 	
 	public void update(){
-		AI.sortHand();
+		player.sortHand();
 		int gridHeight = 0;
-		int remain = AI.returnHand().size();
+		int remain = player.returnHand().size();
 		contentPane.removeAll();
-		for(int y=0; y<AI.returnHand().size()/15 + 1; y++){
+		for(int y=0; y<player.returnHand().size()/15 + 1; y++){
 			if(remain<15){
 				for(int x=0; x<remain; x++){
 					setButton(y, x);
@@ -82,7 +80,7 @@ public class UnoUI extends UI{
 	}
 	
 	public void setButton(int y, int x) {
-		final CardButton button = new CardButton(AI.returnHand().get(15*y+x));
+		final CardButton button = new CardButton(player.returnHand().get(15*y+x));
 		final Card temp = button.returnCard();
 		final int tempNum = x;
 		GridBagConstraints b = new GridBagConstraints();
@@ -92,10 +90,32 @@ public class UnoUI extends UI{
 	}
 	
 	public void act(){
-		AI.act();
+		Card chosen = chooseCard();
+		if(chosen!=null){
+			deck.receiveCard(player.giveCard(chosen));
+			Main.returnGame().addText("AI" + player.playerNum + " played " + chosen + "\n");
+		}
+		else{
+			drawCard();
+			Main.returnGame().addText("AI" + player.playerNum +" drew a card\n");
+		}
 	}
 	
-	public UnoAI returnAI(){
-		return AI;
+	public void drawCard(){
+		player.receiveCard(deck.giveCard());
+	}
+	
+	public Card chooseCard(){
+		for(int x=0; x<player.hand.size(); x++){
+			if(deck.returnLastCard().returnCardColor().equals(player.hand.get(x).returnCardColor()) || deck.returnLastCard().returnCardNum() == (player.hand.get(x).returnCardNum()) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
+				return player.hand.get(x);
+			}
+		}
+		for(int x=0; x<player.hand.size(); x++){
+			if(player.hand.get(x).returnCardColor().equals(Color.BLACK)){
+				return player.hand.get(x);
+			}
+		}
+		return null;
 	}
 }

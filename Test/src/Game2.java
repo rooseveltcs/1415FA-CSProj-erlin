@@ -13,24 +13,27 @@ public class Game2 extends Game{
 		}
 		for(int x=0; x<(players-humans); x++){
 			int temp = (int)(Math.random()*(uiList.size()));
-			uiList.add(temp, new UnoUI(new UnoAI(temp+1, deck)));
+			uiList.add(temp, new UnoUI(new Player(temp+1), deck));
 		}
 		Card firstCard = deck.giveCard();
 		deck.receiveCard(firstCard);
 		createGui();
 		addText("First card: " + firstCard + "\n");
-		gameStart();
 	}
 	
 	public void gameStart(){
-		//for(int x=0; x<1; x++){
-		//	if(uiList.get(x).returnType() == 1){
-				
-		//	}
-		//	else{
-					//work on this
-				uiList.get(0).returnAI().act();
-		//	}
-		//}
+		for(int x=0; x<players; x++){
+			if(uiList.get(x).returnType() == 1){
+				uiList.get(x).setTurn(true);
+				while(uiList.get(x).returnTurn()){
+				}
+			}
+			else{
+				uiList.get(x).act();
+			}
+			if(x==players-1){
+				x=-1;
+			}
+		}
 	}
 }

@@ -1,19 +1,35 @@
+import java.awt.Container;
+
 import javax.swing.JFrame;
 
 
 public class UI extends JFrame{
 	static final long serialVersionUID = 0;
+	protected Container contentPane;
 	protected int type;
 	protected Player player;
-	protected UnoAI AI;
+	protected Deck deck;
+	protected boolean turn;
 	
 	//creates UI of a player, with # of decks
 	public UI(){
 		
 	}
 	
+	public void act(){
+		
+	}
+	
 	public void endTurn(){
 		
+	}
+	
+	public void setTurn(boolean b){
+		turn = b;
+	}
+	
+	public boolean returnTurn(){
+		return turn;
 	}
 	
 	public int returnType(){
@@ -23,8 +39,8 @@ public class UI extends JFrame{
 	public Player returnPlayer(){
 		return player;
 	}
-
-	public UnoAI returnAI(){
-		return AI;
+	
+	public Deck returnDeck(){
+		return deck;
 	}
 }
