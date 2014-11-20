@@ -62,10 +62,10 @@ public class Game extends JFrame{
 			final int temp = x;
 			JButton button;
 			if(uiList.get(x).getClass().equals(UnoUI.class)){
-				button = new JButton("AI" + (x+1));
+				button = new JButton("AI" + uiList.get(x).player.playerNum);
 			}
 			else{
-				button = new JButton("Player" + (x+1));
+				button = new JButton("Player" + uiList.get(x).player.playerNum);
 			}
 			button.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e){

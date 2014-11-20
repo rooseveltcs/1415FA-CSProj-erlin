@@ -90,14 +90,37 @@ public class UnoUI extends UI{
 	}
 	
 	public void act(){
-		Card chosen = chooseCard();
-		if(chosen!=null){
-			deck.receiveCard(player.giveCard(chosen));
-			Main.returnGame().addText("AI" + player.playerNum + " played " + chosen + "\n");
+		//work on skip, +2, +4
+		if(deck.returnLastCard().returnCardRep().equals("S") || deck.returnLastCard().returnCardRep().equals("+2") || deck.returnLastCard().returnCardRep().equals("+4")){
+			if(deck.returnLastCard().returnCardNum() == 11){
+				deck.returnLastCard().setCardRep("nothing");
+				Main.returnGame().addText("AI" + player.playerNum + " skipped\n");
+			}
+			if(deck.returnLastCard().returnCardNum() == 12){
+				deck.returnLastCard().setCardRep("nothing");
+				drawCard();
+				drawCard();
+				Main.returnGame().addText("AI" + player.playerNum + " drew 2 cards\n");
+			}
+			if(deck.returnLastCard().returnCardNum() == 14){
+				deck.returnLastCard().setCardRep("nothing");
+				drawCard();
+				drawCard();
+				drawCard();
+				drawCard();
+				Main.returnGame().addText("AI" + player.playerNum + " drew 4 cards\n");
+			}
 		}
 		else{
-			drawCard();
-			Main.returnGame().addText("AI" + player.playerNum +" drew a card\n");
+			Card chosen = chooseCard();
+			if(chosen!=null){
+				deck.receiveCard(player.giveCard(chosen));
+				Main.returnGame().addText("AI" + player.playerNum + " played " + chosen + "\n");
+			}
+			else{
+				drawCard();
+				Main.returnGame().addText("AI" + player.playerNum +" drew a card\n");
+			}
 		}
 	}
 	

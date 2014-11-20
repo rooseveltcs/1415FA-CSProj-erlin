@@ -13,7 +13,7 @@ public class Game2 extends Game{
 		}
 		for(int x=0; x<(players-humans); x++){
 			int temp = (int)(Math.random()*(uiList.size()));
-			uiList.add(temp, new UnoUI(new Player(temp+1), deck));
+			uiList.add(temp, new UnoUI(new Player(x+1), deck));
 		}
 		Card firstCard = deck.giveCard();
 		deck.receiveCard(firstCard);
