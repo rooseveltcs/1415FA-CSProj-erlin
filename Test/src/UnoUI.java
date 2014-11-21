@@ -92,18 +92,18 @@ public class UnoUI extends UI{
 	public void act(){
 		//work on skip, +2, +4
 		if(deck.returnLastCard().returnCardRep().equals("S") || deck.returnLastCard().returnCardRep().equals("+2") || deck.returnLastCard().returnCardRep().equals("+4")){
-			if(deck.returnLastCard().returnCardNum() == 11){
-				deck.returnLastCard().setCardRep("nothing");
-				Main.returnGame().addText("AI" + player.playerNum + " skipped\n");
-			}
+			//if(deck.returnLastCard().returnCardNum() == 11){
+				//deck.returnLastCard().setCardRep("nothing");
+			//	Main.returnGame().addText("AI" + player.playerNum + " skipped\n");
+			//}
 			if(deck.returnLastCard().returnCardNum() == 12){
-				deck.returnLastCard().setCardRep("nothing");
+				//deck.returnLastCard().setCardRep("nothing");
 				drawCard();
 				drawCard();
 				Main.returnGame().addText("AI" + player.playerNum + " drew 2 cards\n");
 			}
 			if(deck.returnLastCard().returnCardNum() == 14){
-				deck.returnLastCard().setCardRep("nothing");
+				//deck.returnLastCard().setCardRep("nothing");
 				drawCard();
 				drawCard();
 				drawCard();

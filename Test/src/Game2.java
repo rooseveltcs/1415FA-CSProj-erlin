@@ -23,13 +23,24 @@ public class Game2 extends Game{
 	
 	public void gameStart(){
 		for(int x=0; x<players; x++){
-			if(uiList.get(x).returnType() == 1){
-				uiList.get(x).setTurn(true);
-				while(uiList.get(x).returnTurn()){
+			if(deck.returnLastCard().returnCardRep().equals("S")){
+				if(uiList.get(x).returnType() == 1){
+					Main.returnGame().addText("Player" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
 				}
+				else{
+					Main.returnGame().addText("AI" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
+				}	
+				x++;
 			}
 			else{
-				uiList.get(x).act();
+				if(uiList.get(x).returnType() == 1){
+					uiList.get(x).setTurn(true);
+					while(uiList.get(x).returnTurn()){
+					}
+				}
+				else{
+					uiList.get(x).act();
+				}	
 			}
 			if(x==players-1){
 				x=-1;
