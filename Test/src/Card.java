@@ -7,9 +7,11 @@ public class Card implements Comparable<Card>{
 	private Color cardColor;
 	private String colorRep;
 	private int colorInt;
+	private boolean used;
 	
 	//sets a cards properties
 	public Card(int num, Color color){
+		used = false;
 		cardNum = num;
 		cardColor = color;
 		if(cardNum>9){
@@ -63,10 +65,18 @@ public class Card implements Comparable<Card>{
 		}
 	}
 	
+	public boolean returnUsed(){
+		return used;
+	}
+	
+	public void setUsed(boolean b){
+		used = b;
+	}
+	
 	public int returnCardNum() {
 		return cardNum;
 	}
-
+	
 	//should not be used
 	public void setCardNum(int cardNum) {
 		this.cardNum = cardNum;

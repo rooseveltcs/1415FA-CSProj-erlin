@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 
 
 public class Game2 extends Game{
@@ -15,7 +17,7 @@ public class Game2 extends Game{
 			int temp = (int)(Math.random()*(uiList.size()));
 			uiList.add(temp, new UnoUI(new Player(x+1), deck));
 		}
-		Card firstCard = deck.giveCard();
+		Card firstCard = deck.giveCard();	
 		deck.receiveCard(firstCard);
 		createGui();
 		addText("First card: " + firstCard + "\n");
@@ -23,14 +25,14 @@ public class Game2 extends Game{
 	
 	public void gameStart(){
 		for(int x=0; x<players; x++){
-			if(deck.returnLastCard().returnCardRep().equals("S")){
+			if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
 				if(uiList.get(x).returnType() == 1){
 					Main.returnGame().addText("Player" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
 				}
 				else{
 					Main.returnGame().addText("AI" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
-				}	
-				x++;
+				}
+				deck.returnLastCard().setUsed(true);
 			}
 			else{
 				if(uiList.get(x).returnType() == 1){
@@ -42,7 +44,7 @@ public class Game2 extends Game{
 					uiList.get(x).act();
 				}	
 			}
-			if(x==players-1){
+			if(x>=players-1){
 				x=-1;
 			}
 		}
