@@ -52,8 +52,6 @@ public class LimitedUI extends UI{
 		for(int y=0; y<player.returnHand().size()/15 + 1; y++){
 			if(remain<15){
 				for(int x=0; x<remain; x++){
-					//could probably be shortened and be more easier to read, but might take too much time
-					//below code also the same
 					setButton(y, x);
 				}
 			}
@@ -98,7 +96,6 @@ public class LimitedUI extends UI{
 		bU.gridwidth = 3;
 		contentPane.add(buttonU, bU);
 		//sets EndTurn Button
-		/*
 		JButton buttonE = new JButton("EndTurn");
 		buttonE.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
@@ -111,8 +108,7 @@ public class LimitedUI extends UI{
 		bE.gridy = gridHeight + 1;
 		bE.gridwidth = 3;
 		contentPane.add(buttonE, bE);
-		buttonE.setEnabled(endTurnButton);
-		*/
+		//buttonE.setEnabled(endTurnButton);
 		
 		pack();
 		contentPane.paintAll(getGraphics());
@@ -124,6 +120,9 @@ public class LimitedUI extends UI{
 		final int tempNum = x;
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
+				if(button.returnCard().returnColorRep().equals("BLACK")){
+					//to be added
+				}
 				if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
 					deck.receiveCard(temp);
 					tempDeck.receiveCard(temp);
@@ -143,13 +142,6 @@ public class LimitedUI extends UI{
 		b.gridy = y;
 		contentPane.add(button, b);
 	}
-	
-	/*
-	public void endTurn(){
-		
-		System.exit(0);
-	}
-	*/
 	
 	public void endTurn(){
 		tempDeck.returnDeck().clear();

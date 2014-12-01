@@ -28,6 +28,7 @@ public class Deck {
 		for(int x=0; x<size; x++){
 			int temp = (int)(Math.random()*deck.size());
 			randomizedDeck.add(deck.get(temp));
+			randomizedDeck.get(randomizedDeck.size()-1).setUsed(false);
 			deck.remove(temp);
 		}
 	}

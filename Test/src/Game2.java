@@ -17,7 +17,7 @@ public class Game2 extends Game{
 			int temp = (int)(Math.random()*(uiList.size()));
 			uiList.add(temp, new UnoUI(new Player(x+1), deck));
 		}
-		Card firstCard = deck.giveCard();	
+		Card firstCard = deck.giveCard();
 		deck.receiveCard(firstCard);
 		createGui();
 		addText("First card: " + firstCard + "\n");
@@ -26,27 +26,46 @@ public class Game2 extends Game{
 	public void gameStart(){
 		for(int x=0; x<players; x++){
 			if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
-				if(uiList.get(x).returnType() == 1){
-					Main.returnGame().addText("Player" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
-				}
-				else{
-					Main.returnGame().addText("AI" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
-				}
-				deck.returnLastCard().setUsed(true);
+				skipPlayed(x);
 			}
 			else{
-				if(uiList.get(x).returnType() == 1){
-					uiList.get(x).setTurn(true);
-					while(uiList.get(x).returnTurn()){
-					}
-				}
-				else{
-					uiList.get(x).act();
-				}	
+				normalCardPlayed(x);
 			}
 			if(x>=players-1){
 				x=-1;
 			}
 		}
 	}
+
+	public void normalCardPlayed(int x) {
+		if(uiList.get(x).returnType() == 1){
+			uiList.get(x).setTurn(true);
+			while(uiList.get(x).returnTurn()){
+			}
+		}
+		else{
+			try{
+			Thread.sleep(500 + (int)(Math.random()*2000));
+			}
+			catch(InterruptedException e){
+				System.out.println("exception");
+			}
+			uiList.get(x).act();
+		}
+	}
+	
+	public void skipPlayed(int x){
+		if(uiList.get(x).returnType() == 1){
+			Main.returnGame().addText("Player" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
+		}
+		else{
+			Main.returnGame().addText("AI" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
+		}
+		deck.returnLastCard().setUsed(true);
+	}
+	
+	public void reversePlayed(int x){
+		
+	}
+	
 }

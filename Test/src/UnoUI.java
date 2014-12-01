@@ -90,8 +90,8 @@ public class UnoUI extends UI{
 	}
 	
 	public void act(){
-		//work on +2, +4
-		//work on reset used when shuffle
+		//work on +2, +4 (maybe done)
+		//work on reset "used" when shuffle
 		//work on wild cards color change
 		if((deck.returnLastCard().returnCardRep().equals("+2") || deck.returnLastCard().returnCardRep().equals("+4")) && deck.returnLastCard().returnUsed() == false){
 			if(deck.returnLastCard().returnCardNum() == 12){

@@ -70,7 +70,6 @@ public class Game extends JFrame{
 			button.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e){
 	            	if(uiList.get(temp).isVisible()){
-	            		uiList.get(temp).endTurn();
 	            		uiList.get(temp).setVisible(false);
 	            	}
 	            	else{
