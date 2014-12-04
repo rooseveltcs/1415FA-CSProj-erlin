@@ -122,8 +122,27 @@ public class LimitedUI extends UI{
 			public void actionPerformed(ActionEvent e){
 				if(button.returnCard().returnColorRep().equals("BLACK")){
 					//to be added
+					CardFrame cardFrame = new CardFrame(button.returnCard());
+					cardFrame.setVisible(true);
+					while(cardFrame.returnCard().returnColorRep().equals("BLACK")){
+					}
+					
+					System.out.println("Gewgwe");
+					/*
+					deck.receiveCard(temp);
+					tempDeck.receiveCard(temp);
+					player.returnHand().remove(tempNum);
+					Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
+					System.out.println("hand: " + player.returnHand().size());
+					System.out.println("played: " + temp.returnCardNum());
+					System.out.println("remaining: " + deck.returnRandomized().size());
+					System.out.println("playedDeck: " + deck.returnDeck().size());
+					pack();
+					contentPane.repaint();
+					update();
+					*/
 				}
-				if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
+				else if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
 					deck.receiveCard(temp);
 					tempDeck.receiveCard(temp);
 					player.returnHand().remove(tempNum);
