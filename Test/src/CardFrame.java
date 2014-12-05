@@ -18,10 +18,11 @@ public class CardFrame extends JFrame{
 	private Card yellow = new Card(-1, Color.YELLOW);
 	private Card blue = new Card(-1, Color.BLUE);
 	private Card red = new Card(-1, Color.RED);
+	private boolean open = true;
 	
-	public CardFrame(Card Card){
+	public CardFrame(Card temp){
 		setColors();
-		this.card = card;
+		this.card = temp;
 		createGui();
 	}
 	
@@ -33,6 +34,9 @@ public class CardFrame extends JFrame{
 		contentPane.setLayout(gridBag);
 		
 		update();
+		pack();
+		this.paintComponents(getGraphics());
+		setVisible(true);
 	}
 	
 	public void update(){
@@ -46,11 +50,12 @@ public class CardFrame extends JFrame{
 				card.setCardColor(color);
 				card.setColorRep(rep);
 				card.setColorInt(temp);
+				open = false;
+				setVisible(false);
 			}});
 			GridBagConstraints b = new GridBagConstraints();
 			contentPane.add(button, b);
 			pack();
-			contentPane.repaint();
 		}
 	}
 	
@@ -67,5 +72,9 @@ public class CardFrame extends JFrame{
 	
 	public Card returnCard(){
 		return card;
+	}
+	
+	public boolean returnOpen(){
+		return open;
 	}
 }

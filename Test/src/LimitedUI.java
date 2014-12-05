@@ -123,8 +123,9 @@ public class LimitedUI extends UI{
 				if(button.returnCard().returnColorRep().equals("BLACK")){
 					//to be added
 					CardFrame cardFrame = new CardFrame(button.returnCard());
-					cardFrame.setVisible(true);
-					while(cardFrame.returnCard().returnColorRep().equals("BLACK")){
+					//cardFrame.pack();
+					//cardFrame.setVisible(true);
+					while(cardFrame.returnOpen()){
 					}
 					
 					System.out.println("Gewgwe");
