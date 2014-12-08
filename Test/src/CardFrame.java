@@ -35,8 +35,7 @@ public class CardFrame extends JFrame{
 		
 		update();
 		pack();
-		this.paintComponents(getGraphics());
-		setVisible(true);
+		contentPane.paintAll(getGraphics());
 	}
 	
 	public void update(){
@@ -50,8 +49,7 @@ public class CardFrame extends JFrame{
 				card.setCardColor(color);
 				card.setColorRep(rep);
 				card.setColorInt(temp);
-				open = false;
-				setVisible(false);
+				close();
 			}});
 			GridBagConstraints b = new GridBagConstraints();
 			contentPane.add(button, b);
@@ -76,5 +74,9 @@ public class CardFrame extends JFrame{
 	
 	public boolean returnOpen(){
 		return open;
+	}
+	
+	public void close(){
+		setVisible(false);
 	}
 }

@@ -1,5 +1,5 @@
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
@@ -23,5 +23,9 @@ public class CardButton extends JButton{
 	//Should not be used
 	public void setCard(Card card) {
 		this.card = card;
+	}
+	
+	public void setColor(Color color){
+		setBorder(new LineBorder(color));
 	}
 }

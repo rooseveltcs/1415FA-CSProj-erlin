@@ -83,6 +83,11 @@ public class LimitedUI extends UI{
 			public void actionPerformed(ActionEvent e){
 				if(tempDeck.returnDeck().size() != 0){
 					Card tempCard = deck.returnPlayedCard();
+					if(tempCard.returnCardNum() == 13 || tempCard.returnCardNum() == 14){
+						tempCard.setCardColor(Color.BLACK);
+						tempCard.setColorInt(5);
+						tempCard.setColorRep("BLACK");
+					}
 					player.receiveCard(tempCard);
 					tempDeck.returnDeck().remove(tempDeck.returnDeck().size()-1);
 					Main.returnGame().addText("Player" + player.returnPlayerNum() + " took back " + tempCard + ".\n");
@@ -108,7 +113,6 @@ public class LimitedUI extends UI{
 		bE.gridy = gridHeight + 1;
 		bE.gridwidth = 3;
 		contentPane.add(buttonE, bE);
-		//buttonE.setEnabled(endTurnButton);
 		
 		pack();
 		contentPane.paintAll(getGraphics());
@@ -122,28 +126,10 @@ public class LimitedUI extends UI{
 			public void actionPerformed(ActionEvent e){
 				if(button.returnCard().returnColorRep().equals("BLACK")){
 					//to be added
-					CardFrame cardFrame = new CardFrame(button.returnCard());
-					//cardFrame.pack();
-					//cardFrame.setVisible(true);
-					while(cardFrame.returnOpen()){
-					}
-					
-					System.out.println("Gewgwe");
-					/*
-					deck.receiveCard(temp);
-					tempDeck.receiveCard(temp);
-					player.returnHand().remove(tempNum);
-					Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
-					System.out.println("hand: " + player.returnHand().size());
-					System.out.println("played: " + temp.returnCardNum());
-					System.out.println("remaining: " + deck.returnRandomized().size());
-					System.out.println("playedDeck: " + deck.returnDeck().size());
-					pack();
-					contentPane.repaint();
-					update();
-					*/
+					button.returnCard().returnCardFrame().pack();
+					button.returnCard().returnCardFrame().setVisible(true);
 				}
-				else if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK)){
+				else if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK) || button.returnCard().returnCardNum() == 13 || button.returnCard().returnCardNum() == 14){
 					deck.receiveCard(temp);
 					tempDeck.receiveCard(temp);
 					player.returnHand().remove(tempNum);

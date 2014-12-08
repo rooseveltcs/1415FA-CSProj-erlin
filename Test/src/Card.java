@@ -8,6 +8,7 @@ public class Card implements Comparable<Card>{
 	private String colorRep;
 	private int colorInt;
 	private boolean used;
+	private CardFrame cardFrame;
 	
 	//sets a cards properties
 	public Card(int num, Color color){
@@ -53,6 +54,7 @@ public class Card implements Comparable<Card>{
 		if(cardColor.equals(Color.BLACK)){
 			colorRep = "BLACK";
 			colorInt= 5;
+			cardFrame = new CardFrame(this);
 		}
 	}
 	
@@ -121,5 +123,9 @@ public class Card implements Comparable<Card>{
 	//for testing card properties
 	public String toString(){
 		return cardRep + "-" + colorRep;
+	}
+	
+	public CardFrame returnCardFrame(){
+		return cardFrame;
 	}
 }
