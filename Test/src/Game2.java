@@ -1,8 +1,8 @@
-import java.awt.Color;
 
 
 
 public class Game2 extends Game{
+	static final long serialVersionUID = 0;
 	protected int humans;
 
 	public Game2(int players, int humans, int deckNum){

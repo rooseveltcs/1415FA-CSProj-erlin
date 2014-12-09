@@ -6,6 +6,7 @@ public class Deck {
 	private ArrayList<Card> deck = new ArrayList<Card>(0);
 	private ArrayList<Card> randomizedDeck;
 	private int numDeck;
+	private int draw = 0;
 	
 	//initializes a deck(with number of packs of cards)
 	//to be added: infinite cards(every draw is random, MAY have all Wild or all +4)
@@ -108,5 +109,13 @@ public class Deck {
 	
 	public int returnNumDeck(){
 		return numDeck;
+	}
+	
+	public int returnDraw(){
+		return draw;
+	}
+	
+	public void addDraw(int temp){
+		draw = draw + temp;
 	}
 }

@@ -1,8 +1,6 @@
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JFrame;
-
 
 public class Main {
 	static Game game;
@@ -10,6 +8,9 @@ public class Main {
 	public static void main(String[] args){
 		startGame();
 	}
+	
+	
+	//error on W when more than 2 lines of cards
 	
 	public static void startGame(){
 		game = new Game2(4, 1, 1);

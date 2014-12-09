@@ -6,6 +6,7 @@ import javax.swing.border.LineBorder;
 
 
 public class CardButton extends JButton{
+	static final long serialVersionUID = 0;
 	private Card card;
 	
 	public CardButton(Card card){

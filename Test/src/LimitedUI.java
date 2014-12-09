@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.HeadlessException;
@@ -64,11 +63,21 @@ public class LimitedUI extends UI{
 			}
 		}
 		//sets Draw Button
-		JButton buttonD = new JButton("Draw");
+		JButton buttonD = new JButton("Draw(" + deck.returnDraw() + ")");
 		buttonD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				player.receiveCard(deck.giveCard());
-				Main.returnGame().addText("Player" + player.returnPlayerNum() + " drew a card.\n");
+				if(deck.returnDraw() > 0){
+					Main.returnGame().addText("Player" + player.returnPlayerNum() + " drew " + deck.returnDraw() + " card.\n");
+					for(int x=0; x<deck.returnDraw(); x++){
+					player.receiveCard(deck.giveCard());
+					deck.addDraw(-1);
+					}
+					System.out.println("draw: " + deck.returnDraw());
+				}
+				else{
+					player.receiveCard(deck.giveCard());
+					Main.returnGame().addText("Player" + player.returnPlayerNum() + " drew a card.\n");
+				}
 				contentPane.repaint();
 				pack();
 				update();
@@ -125,11 +134,16 @@ public class LimitedUI extends UI{
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(button.returnCard().returnColorRep().equals("BLACK")){
-					//to be added
 					button.returnCard().returnCardFrame().pack();
 					button.returnCard().returnCardFrame().setVisible(true);
 				}
-				else if(deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK) || button.returnCard().returnCardNum() == 13 || button.returnCard().returnCardNum() == 14){
+				else if(deck.returnDraw() == 0 && (deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK) || button.returnCard().returnCardNum() == 13 || button.returnCard().returnCardNum() == 14)){
+					if(button.returnCard().returnCardNum() == 12){
+						deck.addDraw(2);
+					}
+					else if(button.returnCard().returnCardNum() == 14){
+						deck.addDraw(4);
+					}
 					deck.receiveCard(temp);
 					tempDeck.receiveCard(temp);
 					player.returnHand().remove(tempNum);
@@ -142,6 +156,27 @@ public class LimitedUI extends UI{
 					contentPane.repaint();
 					update();
 				}
+				else if(deck.returnDraw() > 0){
+						if((button.returnCard().returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor())) || button.returnCard().returnCardNum() == 14){
+							if(button.returnCard().returnCardNum() == 12){
+								deck.addDraw(2);
+							}
+							else if(button.returnCard().returnCardNum() == 14){
+								deck.addDraw(4);
+							}
+							deck.receiveCard(temp);
+							tempDeck.receiveCard(temp);
+							player.returnHand().remove(tempNum);
+							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
+							System.out.println("hand: " + player.returnHand().size());
+							System.out.println("played: " + temp.returnCardNum());
+							System.out.println("remaining: " + deck.returnRandomized().size());
+							System.out.println("playedDeck: " + deck.returnDeck().size());
+							pack();
+							contentPane.repaint();
+							update();
+						}
+					}
 			}});
 		GridBagConstraints b = new GridBagConstraints();
 		b.gridx = x;
