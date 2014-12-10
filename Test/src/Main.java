@@ -11,7 +11,7 @@ public class Main {
 	
 	
 	//error on W when more than 2 lines of cards
-	
+	//still needs to be fixed
 	public static void startGame(){
 		game = new Game2(4, 1, 1);
 		game.pack();

@@ -48,8 +48,13 @@ public class LimitedUI extends UI{
 		int gridHeight = 0;
 		int remain = player.returnHand().size();
 		contentPane.removeAll();
-		for(int y=0; y<player.returnHand().size()/15 + 1; y++){
-			if(remain<15){
+		int temp = (remain/15);
+		if(remain%15 != 0){
+			temp++;
+		}
+		//player.returnHand().size()/15 + 1
+		for(int y=0; y<temp; y++){
+			if(remain<=15){
 				for(int x=0; x<remain; x++){
 					setButton(y, x);
 				}
@@ -62,6 +67,7 @@ public class LimitedUI extends UI{
 			gridHeight++;
 			}
 		}
+				
 		//sets Draw Button
 		JButton buttonD = new JButton("Draw(" + deck.returnDraw() + ")");
 		buttonD.addActionListener(new ActionListener() {
@@ -134,8 +140,10 @@ public class LimitedUI extends UI{
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(button.returnCard().returnColorRep().equals("BLACK")){
-					button.returnCard().returnCardFrame().pack();
-					button.returnCard().returnCardFrame().setVisible(true);
+					CardFrame cardFrame = new CardFrame(button.returnCard(), returnSelf());
+					cardFrame.pack();
+					cardFrame.setVisible(true);
+					tempStop();
 				}
 				else if(deck.returnDraw() == 0 && (deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor()) || deck.returnLastCard().returnCardNum() == (button.returnCard().returnCardNum()) || button.returnCard().returnCardColor().equals(Color.BLACK) || deck.returnLastCard().returnCardColor().equals(Color.BLACK) || button.returnCard().returnCardNum() == 13 || button.returnCard().returnCardNum() == 14)){
 					if(button.returnCard().returnCardNum() == 12){
@@ -208,5 +216,9 @@ public class LimitedUI extends UI{
 	
 	public Deck returnTempDeck(){
 		return tempDeck;
+	}
+	
+	public UI returnSelf(){
+		return this;
 	}
 }

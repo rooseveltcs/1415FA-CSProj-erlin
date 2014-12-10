@@ -19,10 +19,12 @@ public class CardFrame extends JFrame{
 	private Card blue = new Card(-1, Color.BLUE);
 	private Card red = new Card(-1, Color.RED);
 	private boolean open = true;
+	private UI ui;
 	
-	public CardFrame(Card temp){
+	public CardFrame(Card temp, UI ui){
 		setColors();
 		this.card = temp;
+		this.ui = ui;
 		createGui();
 	}
 	
@@ -49,6 +51,8 @@ public class CardFrame extends JFrame{
 				card.setCardColor(color);
 				card.setColorRep(rep);
 				card.setColorInt(temp);
+				ui.update();
+				ui.tempStart();
 				close();
 			}});
 			GridBagConstraints b = new GridBagConstraints();
@@ -77,6 +81,7 @@ public class CardFrame extends JFrame{
 	}
 	
 	public void close(){
+		open = false;
 		setVisible(false);
 	}
 }

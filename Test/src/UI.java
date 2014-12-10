@@ -43,4 +43,16 @@ public class UI extends JFrame{
 	public Deck returnDeck(){
 		return deck;
 	}
+	
+	public void tempStop(){
+		setEnabled(false);
+	}
+	
+	public void tempStart(){
+		setEnabled(true);
+	}
+	
+	public void update(){
+		
+	}
 }
