@@ -25,10 +25,15 @@ public class Deck {
 	//shuffles deck into randomizedDeck, removes cards in Deck
 	public void randomize(ArrayList<Card> deck){
 		randomizedDeck = new ArrayList<Card>(deck.size());
-		int size = deck.size();
+		int size = deck.size()-1;
 		for(int x=0; x<size; x++){
-			int temp = (int)(Math.random()*deck.size());
+			int temp = (int)(Math.random()*(deck.size()-1));
 			randomizedDeck.add(deck.get(temp));
+			if(randomizedDeck.get(randomizedDeck.size()-1).returnCardNum() == 13 || randomizedDeck.get(randomizedDeck.size()-1).returnCardNum() == 14){
+				randomizedDeck.get(randomizedDeck.size()-1).setCardColor(Color.BLACK);
+				randomizedDeck.get(randomizedDeck.size()-1).setColorInt(5);
+				randomizedDeck.get(randomizedDeck.size()-1).setColorRep("BLACK");
+			}
 			randomizedDeck.get(randomizedDeck.size()-1).setUsed(false);
 			deck.remove(temp);
 		}

@@ -95,12 +95,14 @@ public class UnoUI extends UI{
 		//work on wild cards color change
 		if((deck.returnLastCard().returnCardRep().equals("+2") || deck.returnLastCard().returnCardRep().equals("+4")) && deck.returnLastCard().returnUsed() == false){
 			if(deck.returnLastCard().returnCardNum() == 12){
+				//to add stack +2, +4 if possible
 				deck.returnLastCard().setUsed(true);
 				drawCard();
 				drawCard();
 				Main.returnGame().addText("AI" + player.playerNum + " drew 2 cards\n");
 			}
 			if(deck.returnLastCard().returnCardNum() == 14){
+				//to add stack +2, +4 if possible
 				deck.returnLastCard().setUsed(true);
 				drawCard();
 				drawCard();

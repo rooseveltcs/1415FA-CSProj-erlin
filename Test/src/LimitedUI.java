@@ -52,7 +52,6 @@ public class LimitedUI extends UI{
 		if(remain%15 != 0){
 			temp++;
 		}
-		//player.returnHand().size()/15 + 1
 		for(int y=0; y<temp; y++){
 			if(remain<=15){
 				for(int x=0; x<remain; x++){
@@ -71,12 +70,13 @@ public class LimitedUI extends UI{
 		//sets Draw Button
 		JButton buttonD = new JButton("Draw(" + deck.returnDraw() + ")");
 		buttonD.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
+			public void actionPerformed(ActionEvent e){	
 				if(deck.returnDraw() > 0){
+					int k =deck.returnDraw();
 					Main.returnGame().addText("Player" + player.returnPlayerNum() + " drew " + deck.returnDraw() + " card.\n");
-					for(int x=0; x<deck.returnDraw(); x++){
-					player.receiveCard(deck.giveCard());
-					deck.addDraw(-1);
+					for(int x=0; x<k; x++){
+						player.receiveCard(deck.giveCard());
+						deck.addDraw(-1);
 					}
 					System.out.println("draw: " + deck.returnDraw());
 				}
@@ -136,7 +136,8 @@ public class LimitedUI extends UI{
 	public void setButton(int y, int x) {
 		final CardButton button = new CardButton(player.returnHand().get(15*y+x));
 		final Card temp = button.returnCard();
-		final int tempNum = x;
+		final int tempX = x;
+		final int tempY = y;
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				if(button.returnCard().returnColorRep().equals("BLACK")){
@@ -154,7 +155,7 @@ public class LimitedUI extends UI{
 					}
 					deck.receiveCard(temp);
 					tempDeck.receiveCard(temp);
-					player.returnHand().remove(tempNum);
+					player.returnHand().remove(tempY*15+tempX);
 					Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
 					System.out.println("hand: " + player.returnHand().size());
 					System.out.println("played: " + temp.returnCardNum());
@@ -165,7 +166,7 @@ public class LimitedUI extends UI{
 					update();
 				}
 				else if(deck.returnDraw() > 0){
-						if((button.returnCard().returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor())) || button.returnCard().returnCardNum() == 14){
+						if((button.returnCard().returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor())) || (button.returnCard().returnCardNum() == 12 && deck.returnLastCard().returnCardNum() == 12) || button.returnCard().returnCardNum() == 14){
 							if(button.returnCard().returnCardNum() == 12){
 								deck.addDraw(2);
 							}
@@ -174,7 +175,7 @@ public class LimitedUI extends UI{
 							}
 							deck.receiveCard(temp);
 							tempDeck.receiveCard(temp);
-							player.returnHand().remove(tempNum);
+							player.returnHand().remove(tempY*15+tempX);
 							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
 							System.out.println("hand: " + player.returnHand().size());
 							System.out.println("played: " + temp.returnCardNum());
