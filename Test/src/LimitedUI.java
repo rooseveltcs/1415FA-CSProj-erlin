@@ -10,7 +10,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-//can be shortened/condensed by extend, maybe execute later
 public class LimitedUI extends UI{
 	static final long serialVersionUID = 0;
 	private Deck tempDeck;

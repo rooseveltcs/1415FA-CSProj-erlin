@@ -109,4 +109,15 @@ public class Game extends JFrame{
 	public ArrayList<UI> returnList(){
 		return uiList;
 	}
+	
+	public void updateUIs(){
+		for(int x=0; x<players; x++){
+			if(uiList.get(x).getClass().equals(LimitedUI.class)){
+				uiList.get(x).pack();
+				uiList.get(x).update();
+				//uiList.get(x).setVisible(false);
+				//uiList.get(x).setVisible(true);
+			}
+		}
+	}
 }

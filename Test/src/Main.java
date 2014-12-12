@@ -9,10 +9,6 @@ public class Main {
 		startGame();
 	}
 	
-	
-	//error on W when more than 2 lines of cards
-	//still needs to be fixed
-	
 	public static void startGame(){
 		game = new Game2(4, 1, 1);
 		game.pack();
@@ -25,28 +21,6 @@ public class Main {
 		game.returnDeck().displayRandomized();
 		
 		game.gameStart();
-		/*
-		Deck deck = new Deck(1);
-		Player player1 = new Player(1);
-		for(int x=0; x<7; x++){
-			player1.receiveCard(deck.giveCard());
-		}
-		player1.displayHand();
-		player1.sortHand();
-		player1.displayHand();
-		*/
-		
-		/*
-		Deck deck = new Deck(1);
-		Player player1 = new Player(1);
-		player1.init();
-		//for(int x=0; x<107; x++){
-		//	deck.giveCard();
-		//}
-		System.out.println(deck.returnRandomized().isEmpty());
-		deck.displayCards();
-		deck.displayRandomized();
-		*/
 	}
 
 	public static Game returnGame(){

@@ -90,30 +90,39 @@ public class UnoUI extends UI{
 	}
 	
 	public void act(){
-		//work on +2, +4 (maybe done)
-		//work on reset "used" when shuffle
 		//work on wild cards color change
-		if((deck.returnLastCard().returnCardRep().equals("+2") || deck.returnLastCard().returnCardRep().equals("+4")) && deck.returnLastCard().returnUsed() == false){
-			if(deck.returnLastCard().returnCardNum() == 12){
-				//to add stack +2, +4 if possible
-				deck.returnLastCard().setUsed(true);
-				drawCard();
-				drawCard();
-				Main.returnGame().addText("AI" + player.playerNum + " drew 2 cards\n");
+
+		if(deck.returnDraw() > 0){
+			Card chosen = chooseDrawCard();
+			if(chosen != null){
+				if(chosen.returnCardNum() == 12 ){
+					deck.addDraw(2);
+				}
+				if(chosen.returnCardNum() == 14){
+					deck.addDraw(4);
+				}
+				deck.receiveCard(player.giveCard(chosen));
+				Main.returnGame().addText("AI" + player.playerNum + " played " + chosen + "\n");
 			}
-			if(deck.returnLastCard().returnCardNum() == 14){
-				//to add stack +2, +4 if possible
-				deck.returnLastCard().setUsed(true);
-				drawCard();
-				drawCard();
-				drawCard();
-				drawCard();
-				Main.returnGame().addText("AI" + player.playerNum + " drew 4 cards\n");
+			else{
+				int temp = deck.returnDraw();
+				for(int x=0; x<temp; x++){
+					drawCard();
+					deck.addDraw(-1);
+				}
+				Main.returnGame().addText("AI" + player.playerNum + " drew " + temp + " cards\n");
 			}
+			Main.returnGame().updateUIs();
 		}
 		else{
 			Card chosen = chooseCard();
 			if(chosen!=null){
+				if(chosen.returnCardNum() == 12 ){
+					deck.addDraw(2);
+				}
+				if(chosen.returnCardNum() == 14){
+					deck.addDraw(4);
+				}
 				deck.receiveCard(player.giveCard(chosen));
 				Main.returnGame().addText("AI" + player.playerNum + " played " + chosen + "\n");
 			}
@@ -121,6 +130,7 @@ public class UnoUI extends UI{
 				drawCard();
 				Main.returnGame().addText("AI" + player.playerNum +" drew a card\n");
 			}
+			Main.returnGame().updateUIs();
 		}
 	}
 	
@@ -136,6 +146,18 @@ public class UnoUI extends UI{
 		}
 		for(int x=0; x<player.hand.size(); x++){
 			if(player.hand.get(x).returnCardColor().equals(Color.BLACK)){
+				return player.hand.get(x);
+			}
+		}
+		return null;
+	}
+	
+	public Card chooseDrawCard(){
+		for(int x=0; x<player.hand.size(); x++){
+			if(player.hand.get(x).returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(player.hand.get(x).returnCardColor())){
+				return player.hand.get(x);
+			}
+			else if(player.hand.get(x).returnCardNum() == 14){
 				return player.hand.get(x);
 			}
 		}
