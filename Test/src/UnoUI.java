@@ -146,6 +146,7 @@ public class UnoUI extends UI{
 		}
 		for(int x=0; x<player.hand.size(); x++){
 			if(player.hand.get(x).returnCardColor().equals(Color.BLACK)){
+				changeColor(player.hand.get(x));
 				return player.hand.get(x);
 			}
 		}
@@ -154,13 +155,73 @@ public class UnoUI extends UI{
 	
 	public Card chooseDrawCard(){
 		for(int x=0; x<player.hand.size(); x++){
-			if(player.hand.get(x).returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(player.hand.get(x).returnCardColor())){
-				return player.hand.get(x);
-			}
-			else if(player.hand.get(x).returnCardNum() == 14){
+			if((player.hand.get(x).returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(player.hand.get(x).returnCardColor())) || deck.returnLastCard().returnCardNum() == (player.hand.get(x).returnCardNum()) || player.hand.get(x).returnCardNum() == 14){
 				return player.hand.get(x);
 			}
 		}
 		return null;
+	}
+	
+	public int[] countColorCards(){
+		int[] colorCards = new int[4];
+		for(int x=0; x<player.hand.size(); x++){
+			if(player.hand.get(x).returnCardColor().equals(Color.GREEN)){
+				colorCards[0]++;
+			}
+			if(player.hand.get(x).returnCardColor().equals(Color.YELLOW)){
+				colorCards[1]++;
+			}
+			if(player.hand.get(x).returnCardColor().equals(Color.BLUE)){
+				colorCards[2]++;
+			}
+			if(player.hand.get(x).returnCardColor().equals(Color.RED)){
+				colorCards[3]++;
+			}
+		}
+		return colorCards;
+	}
+	
+	public Color chooseColor(int[] colorCards){
+		int temp = 0;
+		for(int x=1; x<4; x++){
+			if(colorCards[temp] < colorCards[x]){
+				temp = colorCards[x];
+			}
+		}
+		if(temp == 0){
+			return Color.GREEN;
+		}
+		else if(temp == 1){
+			return Color.YELLOW;
+		}
+		else if(temp == 2){
+			return Color.BLUE;
+		}
+		else if(temp == 3){
+			return Color.RED;
+		}
+		return null;
+	}
+	
+	public void changeColor(Card card){
+		Color tempColor = chooseColor(countColorCards());
+		card.setCardColor(tempColor);
+		if(tempColor.equals(Color.GREEN)){
+			card.setColorRep("GREEN");
+			card.setColorInt(1);
+		}
+		if(tempColor.equals(Color.YELLOW)){
+			card.setColorRep("YELLOW");
+			card.setColorInt(2);
+		}
+		if(tempColor.equals(Color.BLUE)){
+			card.setColorRep("BLUE");
+			card.setColorInt(3);
+		}
+		if(tempColor.equals(Color.RED)){
+			card.setColorRep("RED");
+			card.setColorInt(4);
+		}
+		
 	}
 }

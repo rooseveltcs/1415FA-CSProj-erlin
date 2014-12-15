@@ -25,11 +25,18 @@ public class Game2 extends Game{
 	
 	public void gameStart(){
 		for(int x=0; x<players; x++){
-			if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
-				skipPlayed(x);
+			if(uiList.get(x).player.hand.size() != 0){
+				if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
+					skipPlayed(x);
+				}
+				else{
+					normalCardPlayed(x);
+				}
+				
 			}
 			else{
-				normalCardPlayed(x);
+				uiList.get(x).setEnabled(false);
+				Main.returnGame().addText("ended");
 			}
 			if(x>=players-1){
 				x=-1;
