@@ -19,6 +19,8 @@ public class Game extends JFrame{
 	protected Deck deck;
 	protected ArrayList<UI> uiList = new ArrayList<UI>(0);
 	
+	protected int place = 0;
+	
 	protected JTextArea jtArea;
 	protected JTextField jtField;
 	

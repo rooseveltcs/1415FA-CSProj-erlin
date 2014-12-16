@@ -32,11 +32,15 @@ public class Game2 extends Game{
 				else{
 					normalCardPlayed(x);
 				}
-				
 			}
 			else{
-				uiList.get(x).setEnabled(false);
-				Main.returnGame().addText("ended");
+				if(uiList.get(x).returnPlace() == 0){
+					place++;
+					Main.returnGame().addText(uiList.get(x).getTitle() + " finished " + place);
+					uiList.get(x).setPlace(place);
+					uiList.get(x).setTitle(uiList.get(x).getTitle()+"(" + place + ")");
+					uiList.get(x).setEnabled(false);
+				}
 			}
 			if(x>=players-1){
 				x=-1;

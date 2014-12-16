@@ -156,7 +156,10 @@ public class UnoUI extends UI{
 	public Card chooseDrawCard(){
 		for(int x=0; x<player.hand.size(); x++){
 			if((player.hand.get(x).returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(player.hand.get(x).returnCardColor())) || deck.returnLastCard().returnCardNum() == (player.hand.get(x).returnCardNum()) || player.hand.get(x).returnCardNum() == 14){
-				return player.hand.get(x);
+				if(player.hand.get(x).returnCardColor().equals(Color.BLACK)){
+					changeColor(player.hand.get(x));
+					return player.hand.get(x);
+				}
 			}
 		}
 		return null;
@@ -185,7 +188,7 @@ public class UnoUI extends UI{
 		int temp = 0;
 		for(int x=1; x<4; x++){
 			if(colorCards[temp] < colorCards[x]){
-				temp = colorCards[x];
+				temp = x;
 			}
 		}
 		if(temp == 0){

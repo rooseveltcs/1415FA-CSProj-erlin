@@ -10,6 +10,7 @@ public class UI extends JFrame{
 	protected Player player;
 	protected Deck deck;
 	protected boolean turn;
+	protected int place = 0;
 	
 	//creates UI of a player, with # of decks
 	public UI(){
@@ -54,5 +55,13 @@ public class UI extends JFrame{
 	
 	public void update(){
 		
+	}
+	
+	public int returnPlace(){
+		return place;
+	}
+	
+	public void setPlace(int place){
+		this.place = place;
 	}
 }
