@@ -152,6 +152,9 @@ public class LimitedUI extends UI{
 					else if(button.returnCard().returnCardNum() == 14){
 						deck.addDraw(4);
 					}
+					else if(button.returnCard().returnCardRep().equals("R")){
+						Main.returnGame().setOrder(false);
+					}
 					deck.receiveCard(temp);
 					tempDeck.receiveCard(temp);
 					player.returnHand().remove(tempY*15+tempX);
@@ -165,26 +168,26 @@ public class LimitedUI extends UI{
 					update();
 				}
 				else if(deck.returnDraw() > 0){
-						if((button.returnCard().returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor())) || (button.returnCard().returnCardNum() == 12 && deck.returnLastCard().returnCardNum() == 12) || button.returnCard().returnCardNum() == 14){
-							if(button.returnCard().returnCardNum() == 12){
-								deck.addDraw(2);
-							}
-							else if(button.returnCard().returnCardNum() == 14){
-								deck.addDraw(4);
-							}
-							deck.receiveCard(temp);
-							tempDeck.receiveCard(temp);
-							player.returnHand().remove(tempY*15+tempX);
-							Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
-							System.out.println("hand: " + player.returnHand().size());
-							System.out.println("played: " + temp.returnCardNum());
-							System.out.println("remaining: " + deck.returnRandomized().size());
-							System.out.println("playedDeck: " + deck.returnDeck().size());
-							pack();
-							contentPane.repaint();
-							update();
+					if((button.returnCard().returnCardNum() == 12 && deck.returnLastCard().returnCardColor().equals(button.returnCard().returnCardColor())) || (button.returnCard().returnCardNum() == 12 && deck.returnLastCard().returnCardNum() == 12) || button.returnCard().returnCardNum() == 14){
+						if(button.returnCard().returnCardNum() == 12){
+							deck.addDraw(2);
 						}
+						else if(button.returnCard().returnCardNum() == 14){
+							deck.addDraw(4);
+						}
+						deck.receiveCard(temp);
+						tempDeck.receiveCard(temp);
+						player.returnHand().remove(tempY*15+tempX);
+						Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
+						System.out.println("hand: " + player.returnHand().size());
+						System.out.println("played: " + temp.returnCardNum());
+						System.out.println("remaining: " + deck.returnRandomized().size());
+						System.out.println("playedDeck: " + deck.returnDeck().size());
+						pack();
+						contentPane.repaint();
+						update();
 					}
+				}
 			}});
 		GridBagConstraints b = new GridBagConstraints();
 		b.gridx = x;

@@ -123,6 +123,9 @@ public class UnoUI extends UI{
 				if(chosen.returnCardNum() == 14){
 					deck.addDraw(4);
 				}
+				if(chosen.returnCardRep().equals("R")){
+					Main.returnGame().setOrder(!Main.returnGame().returnOrder());
+				}
 				deck.receiveCard(player.giveCard(chosen));
 				Main.returnGame().addText("AI" + player.playerNum + " played " + chosen + "\n");
 			}

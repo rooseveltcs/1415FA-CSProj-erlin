@@ -1,10 +1,13 @@
+import java.util.ArrayList;
+
 
 
 
 public class Game2 extends Game{
 	static final long serialVersionUID = 0;
 	protected int humans;
-
+	protected int turnPos;
+	
 	public Game2(int players, int humans, int deckNum){
 		this.humans = humans;
 		this.players = players;
@@ -24,30 +27,36 @@ public class Game2 extends Game{
 	}
 	
 	public void gameStart(){
-		for(int x=0; x<players; x++){
-			if(uiList.get(x).player.hand.size() != 0){
-				if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
-					skipPlayed(x);
+			for(turnPos=0; turnPos<players; turnPos++){
+				if(uiList.get(turnPos).returnPlace() == 0){
+					if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
+						skipPlayed(turnPos);
+					}
+					else if(deck.returnLastCard().returnCardRep().equals("R") && deck.returnLastCard().returnUsed() == false){
+						//to fix: R as first card
+						reversePlayed(turnPos);
+					}
+					else{
+						normalCardPlayed(turnPos);
+						checkWin(turnPos);
+					}
 				}
-				else{
-					normalCardPlayed(x);
-				}
-			}
-			else{
-				if(uiList.get(x).returnPlace() == 0){
-					place++;
-					Main.returnGame().addText(uiList.get(x).getTitle() + " finished " + place);
-					uiList.get(x).setPlace(place);
-					uiList.get(x).setTitle(uiList.get(x).getTitle()+"(" + place + ")");
-					uiList.get(x).setEnabled(false);
-				}
-			}
-			if(x>=players-1){
-				x=-1;
+					if(turnPos>=players-1){
+						turnPos=-1;
+					}
 			}
 		}
-	}
 
+	public void checkWin(int x){
+		if(uiList.get(x).player.hand.size() == 0 && uiList.get(x).returnPlace() == 0){
+			place++;
+			Main.returnGame().addText(uiList.get(x).getTitle() + " finished " + place + "\n");
+			uiList.get(x).setPlace(place);
+			uiList.get(x).setTitle(uiList.get(x).getTitle()+"(" + place + ")");
+			uiList.get(x).setEnabled(false);
+		}
+	}
+	
 	public void normalCardPlayed(int x) {
 		if(uiList.get(x).returnType() == 1){
 			uiList.get(x).setTurn(true);
@@ -66,6 +75,14 @@ public class Game2 extends Game{
 	}
 	
 	public void skipPlayed(int x){
+		//to add: ignore finished player
+		while(uiList.get(x).returnPlace() != 0){
+			x++;
+			if(x>=players-1){
+				x=-1;
+			}
+		}
+		//
 		if(uiList.get(x).returnType() == 1){
 			Main.returnGame().addText("Player" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
 		}
@@ -76,7 +93,22 @@ public class Game2 extends Game{
 	}
 	
 	public void reversePlayed(int x){
-		
+		if(x-1<0){
+			x = uiList.size()-1;
+		}
+		else{
+			x = x-1;
+		}
+		UI tempUI = uiList.get(x);
+		ArrayList<UI> tempList = new ArrayList<UI>(0);
+		for(int k=(uiList.size()-1); k>=0; k--){
+			tempList.add(uiList.get(k));
+		}
+		uiList.clear();
+		uiList = tempList;
+		int tempPos = uiList.indexOf(tempUI);
+		turnPos = tempPos;
+		deck.returnLastCard().setUsed(true);
 	}
 	
 }

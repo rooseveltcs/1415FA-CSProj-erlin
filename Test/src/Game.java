@@ -18,6 +18,7 @@ public class Game extends JFrame{
 	protected int players;
 	protected Deck deck;
 	protected ArrayList<UI> uiList = new ArrayList<UI>(0);
+	protected boolean normOrder = true;
 	
 	protected int place = 0;
 	
@@ -61,7 +62,8 @@ public class Game extends JFrame{
 		gridCons2.fill = GridBagConstraints.HORIZONTAL;
 		
 		for(int x=0; x<players; x++){
-			final int temp = x;
+			//final int temp = x;
+			final UI actUI = uiList.get(x);
 			JButton button;
 			if(uiList.get(x).getClass().equals(UnoUI.class)){
 				button = new JButton("AI" + uiList.get(x).player.playerNum);
@@ -71,12 +73,12 @@ public class Game extends JFrame{
 			}
 			button.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e){
-	            	if(uiList.get(temp).isVisible()){
-	            		uiList.get(temp).setVisible(false);
+	            	if(uiList.get(uiList.indexOf(actUI)).isVisible()){
+	            		uiList.get(uiList.indexOf(actUI)).setVisible(false);
 	            	}
 	            	else{
-	            		uiList.get(temp).pack();
-	            		uiList.get(temp).setVisible(true);
+	            		uiList.get(uiList.indexOf(actUI)).pack();
+	            		uiList.get(uiList.indexOf(actUI)).setVisible(true);
 	            		}
 	            	}
 			});
@@ -121,5 +123,13 @@ public class Game extends JFrame{
 				//uiList.get(x).setVisible(true);
 			}
 		}
+	}
+	
+	public void setOrder(boolean b){
+		normOrder = b;
+	}
+	
+	public boolean returnOrder(){
+		return normOrder;
 	}
 }
