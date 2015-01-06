@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 
 
@@ -7,6 +8,7 @@ public class Game2 extends Game{
 	static final long serialVersionUID = 0;
 	protected int humans;
 	protected int turnPos;
+	protected boolean firstCard = true;
 	
 	public Game2(int players, int humans, int deckNum){
 		this.humans = humans;
@@ -29,12 +31,20 @@ public class Game2 extends Game{
 	public void gameStart(){
 			for(turnPos=0; turnPos<players; turnPos++){
 				if(uiList.get(turnPos).returnPlace() == 0){
-					if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
+//					if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
+//						skipPlayed(turnPos);
+//					}
+					if(deck.returnSkip() != 0){
 						skipPlayed(turnPos);
+						deck.addSkip(-1);
 					}
 					else if(deck.returnLastCard().returnCardRep().equals("R") && deck.returnLastCard().returnUsed() == false){
-						//to fix: R as first card
-						reversePlayed(turnPos);
+						if(firstCard){
+							reversePlayed(turnPos+2);
+						}
+						else{
+							reversePlayed(turnPos);
+						}
 					}
 					else{
 						normalCardPlayed(turnPos);
@@ -44,13 +54,19 @@ public class Game2 extends Game{
 					if(turnPos>=players-1){
 						turnPos=-1;
 					}
+				firstCard = false;	
 			}
 		}
-
+	
+	//maybe: check player if one card left
+	
+	
+	//checks if a player has no cards
 	public void checkWin(int x){
 		if(uiList.get(x).player.hand.size() == 0 && uiList.get(x).returnPlace() == 0){
 			place++;
-			Main.returnGame().addText(uiList.get(x).getTitle() + " finished " + place + "\n");
+			//added >>>>>'s and <<<<<'s for better visibility
+			Main.returnGame().addText(">>>>>" + uiList.get(x).getTitle() + " finished " + place + "<<<<<\n");
 			uiList.get(x).setPlace(place);
 			uiList.get(x).setTitle(uiList.get(x).getTitle()+"(" + place + ")");
 			uiList.get(x).setEnabled(false);
@@ -73,23 +89,25 @@ public class Game2 extends Game{
 			uiList.get(x).act();
 		}
 	}
-	
+		
 	public void skipPlayed(int x){
-		//to add: ignore finished player
-		while(uiList.get(x).returnPlace() != 0){
-			x++;
-			if(x>=players-1){
-				x=-1;
+		for(int a=0; a<deck.returnSkip(); a++){
+//			while(uiList.get(x).returnPlace() != 0){
+//				x++;
+//				if(x>=players-1){
+//					x=-1;
+//				}
 			}
-		}
-		//
-		if(uiList.get(x).returnType() == 1){
-			Main.returnGame().addText("Player" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
-		}
-		else{
-			Main.returnGame().addText("AI" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
-		}
-		deck.returnLastCard().setUsed(true);
+			if(uiList.get(x).returnType() == 1){
+				Main.returnGame().addText("Player" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
+			}
+			else{
+				Main.returnGame().addText("AI" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
+			}
+			deck.returnLastCard().setUsed(true);
+//			deck.addSkip(-1);
+//			x++;
+//		}
 	}
 	
 	public void reversePlayed(int x){

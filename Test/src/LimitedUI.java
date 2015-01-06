@@ -21,6 +21,8 @@ public class LimitedUI extends UI{
 		this.player = player;
 		this.deck = deck;
 		this.tempDeck = new Deck(deck.returnNumDeck());
+		tempDeck.returnRandomized().clear();
+		tempDeck.returnDeck().clear();
 		for(int x=0; x<7; x++){
 			this.player.receiveCard(deck.giveCard());
 		}
@@ -154,6 +156,9 @@ public class LimitedUI extends UI{
 					}
 					else if(button.returnCard().returnCardRep().equals("R")){
 						Main.returnGame().setOrder(false);
+					}
+					if(button.returnCard().returnCardRep().equals("S")){
+						deck.addSkip(1);
 					}
 					deck.receiveCard(temp);
 					tempDeck.receiveCard(temp);
