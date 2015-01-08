@@ -18,7 +18,9 @@ public class Main {
 			}
 		});
 		game.setVisible(true);
-		game.returnDeck().displayRandomized();
+		
+		//game.returnDeck().displayDeck();
+		//game.returnDeck().displayRandomized();
 		
 		game.gameStart();
 	}

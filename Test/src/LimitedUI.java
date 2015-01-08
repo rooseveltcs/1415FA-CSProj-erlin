@@ -72,6 +72,7 @@ public class LimitedUI extends UI{
 		JButton buttonD = new JButton("Draw(" + deck.returnDraw() + ")");
 		buttonD.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){	
+				if(returnTurn() == true){
 				if(deck.returnDraw() > 0){
 					int k =deck.returnDraw();
 					Main.returnGame().addText("Player" + player.returnPlayerNum() + " drew " + deck.returnDraw() + " card.\n");
@@ -79,7 +80,7 @@ public class LimitedUI extends UI{
 						player.receiveCard(deck.giveCard());
 						deck.addDraw(-1);
 					}
-					System.out.println("draw: " + deck.returnDraw());
+//					System.out.println("draw: " + deck.returnDraw());
 				}
 				else{
 					player.receiveCard(deck.giveCard());
@@ -88,6 +89,7 @@ public class LimitedUI extends UI{
 				contentPane.repaint();
 				pack();
 				update();
+				}
             }});
 		GridBagConstraints bD = new GridBagConstraints();
 		bD.gridy = gridHeight + 1;
@@ -141,6 +143,7 @@ public class LimitedUI extends UI{
 		final int tempY = y;
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
+				if(returnTurn() == true){
 				if(button.returnCard().returnColorRep().equals("BLACK")){
 					CardFrame cardFrame = new CardFrame(button.returnCard(), returnSelf());
 					cardFrame.pack();
@@ -164,10 +167,10 @@ public class LimitedUI extends UI{
 					tempDeck.receiveCard(temp);
 					player.returnHand().remove(tempY*15+tempX);
 					Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
-					System.out.println("hand: " + player.returnHand().size());
-					System.out.println("played: " + temp.returnCardNum());
-					System.out.println("remaining: " + deck.returnRandomized().size());
-					System.out.println("playedDeck: " + deck.returnDeck().size());
+//					System.out.println("hand: " + player.returnHand().size());
+//					System.out.println("played: " + temp.returnCardNum());
+//					System.out.println("remaining: " + deck.returnRandomized().size());
+//					System.out.println("playedDeck: " + deck.returnDeck().size());
 					pack();
 					contentPane.repaint();
 					update();
@@ -184,14 +187,15 @@ public class LimitedUI extends UI{
 						tempDeck.receiveCard(temp);
 						player.returnHand().remove(tempY*15+tempX);
 						Main.returnGame().addText("Player" + player.returnPlayerNum() + " played " + temp + ".\n");
-						System.out.println("hand: " + player.returnHand().size());
-						System.out.println("played: " + temp.returnCardNum());
-						System.out.println("remaining: " + deck.returnRandomized().size());
-						System.out.println("playedDeck: " + deck.returnDeck().size());
+//						System.out.println("hand: " + player.returnHand().size());
+//						System.out.println("played: " + temp.returnCardNum());
+//						System.out.println("remaining: " + deck.returnRandomized().size());
+//						System.out.println("playedDeck: " + deck.returnDeck().size());
 						pack();
 						contentPane.repaint();
 						update();
 					}
+				}
 				}
 			}});
 		GridBagConstraints b = new GridBagConstraints();

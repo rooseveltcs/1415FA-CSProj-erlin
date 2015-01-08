@@ -28,7 +28,7 @@ public class Deck {
 		randomizedDeck = new ArrayList<Card>(deck.size());
 		int size = deck.size()-1;
 		for(int x=0; x<size; x++){
-			int temp = (int)(Math.random()*(deck.size()-1));
+			int temp = (int)(Math.random()*deck.size());
 			randomizedDeck.add(deck.get(temp));
 			if(randomizedDeck.get(randomizedDeck.size()-1).returnCardNum() == 13 || randomizedDeck.get(randomizedDeck.size()-1).returnCardNum() == 14){
 				randomizedDeck.get(randomizedDeck.size()-1).setCardColor(Color.BLACK);

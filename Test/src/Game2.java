@@ -8,13 +8,14 @@ public class Game2 extends Game{
 	static final long serialVersionUID = 0;
 	protected int humans;
 	protected int turnPos;
+	protected int playingPlayers;
 	protected boolean firstCard = true;
 	
 	public Game2(int players, int humans, int deckNum){
 		this.humans = humans;
+		playingPlayers = players;
 		this.players = players;
 		this.deck = new Deck(deckNum);
-		deck.displayDeck();
 		for(int x=1; x<=humans; x++){
 			uiList.add(new LimitedUI(new Player(x), deck));
 		}
@@ -31,12 +32,8 @@ public class Game2 extends Game{
 	public void gameStart(){
 			for(turnPos=0; turnPos<players; turnPos++){
 				if(uiList.get(turnPos).returnPlace() == 0){
-//					if(deck.returnLastCard().returnCardRep().equals("S") && deck.returnLastCard().returnUsed() == false){
-//						skipPlayed(turnPos);
-//					}
 					if(deck.returnSkip() != 0){
 						skipPlayed(turnPos);
-						deck.addSkip(-1);
 					}
 					else if(deck.returnLastCard().returnCardRep().equals("R") && deck.returnLastCard().returnUsed() == false){
 						if(firstCard){
@@ -48,6 +45,12 @@ public class Game2 extends Game{
 					}
 					else{
 						normalCardPlayed(turnPos);
+						checkUno(turnPos);
+						checkWin(turnPos);
+					}
+					//force ends when only one player left
+					if(playingPlayers <= 1){
+						uiList.get(turnPos).player.hand.clear();
 						checkWin(turnPos);
 					}
 				}
@@ -58,9 +61,6 @@ public class Game2 extends Game{
 			}
 		}
 	
-	//maybe: check player if one card left
-	
-	
 	//checks if a player has no cards
 	public void checkWin(int x){
 		if(uiList.get(x).player.hand.size() == 0 && uiList.get(x).returnPlace() == 0){
@@ -70,6 +70,14 @@ public class Game2 extends Game{
 			uiList.get(x).setPlace(place);
 			uiList.get(x).setTitle(uiList.get(x).getTitle()+"(" + place + ")");
 			uiList.get(x).setEnabled(false);
+			playingPlayers--;
+		}
+	}
+	
+	//check if player has only 1 card left
+	public void checkUno(int x){
+		if(uiList.get(x).player.hand.size() == 1){
+			Main.returnGame().addText(">>>" + uiList.get(x).getTitle() + " has one card left<<<\n");
 		}
 	}
 	
@@ -80,6 +88,7 @@ public class Game2 extends Game{
 			}
 		}
 		else{
+			//makes AI to wait a while before playing
 			try{
 			Thread.sleep(500 + (int)(Math.random()*2000));
 			}
@@ -91,13 +100,6 @@ public class Game2 extends Game{
 	}
 		
 	public void skipPlayed(int x){
-		for(int a=0; a<deck.returnSkip(); a++){
-//			while(uiList.get(x).returnPlace() != 0){
-//				x++;
-//				if(x>=players-1){
-//					x=-1;
-//				}
-			}
 			if(uiList.get(x).returnType() == 1){
 				Main.returnGame().addText("Player" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
 			}
@@ -105,9 +107,7 @@ public class Game2 extends Game{
 				Main.returnGame().addText("AI" + uiList.get(x).returnPlayer().playerNum + " skipped\n");
 			}
 			deck.returnLastCard().setUsed(true);
-//			deck.addSkip(-1);
-//			x++;
-//		}
+			deck.addSkip(-1);
 	}
 	
 	public void reversePlayed(int x){
