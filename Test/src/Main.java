@@ -10,7 +10,7 @@ public class Main {
 	}
 	
 	public static void startGame(){
-		game = new Game2(4, 2, 1);
+		game = new Game2(4, 1, 1);
 		game.pack();
 		game.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
